@@ -1,0 +1,4 @@
+{
+  // Ensure VS Code uses the project virtual environment for Python debugging.
+  "python.defaultInterpreterPath": "${workspaceFolder}/.venv/bin/python"
+}
