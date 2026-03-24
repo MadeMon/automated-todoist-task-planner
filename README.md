@@ -10,12 +10,9 @@
 
 ## Quick start
 
+1. Copy and fill `.env_example` to `.env`
+2. Run:
 ```bash
-python -m venv .venv
-source .venv/bin/activate
-pip install -r requirements.txt
-python -m src.automated_todoist_task_planner.main \
-  --api-token "$TODOIST_API_TOKEN" \
-  --client-secret "$TODOIST_CLIENT_SECRET" \
---integration-user-id "$TODOIST_INTEGRATION_USER_ID"
+pdm install
+pdm run start
 ```

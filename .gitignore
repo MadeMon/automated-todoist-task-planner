@@ -23,3 +23,5 @@ htmlcov/
 
 build/
 src/automated_todoist_task_planner.egg-info/
+pdm.lock
+.pdm-python

@@ -9,8 +9,12 @@ from typing import Any
 from todoist_api_python.api import TodoistAPI
 from todoist_api_python.models import Due, Task
 
+from .planners.base_planner import PlanningResult
+
 
 logger = logging.getLogger(__name__)
+
+PLANNING_FAILED_LABEL = "planning_failed"
 
 
 class TodoistTaskClient:
@@ -35,8 +39,21 @@ class TodoistTaskClient:
         ]
         return tasks
 
-    def update_tasks(self, tasks: list[Task]) -> list[Task]:
+    def update_tasks(self, planning_result: PlanningResult) -> list[Task]:
         """Update only tasks whose due or labels changed compared to Todoist state."""
+
+        # Add a "planning_failed" label to tasks that failed to schedule and remove it from tasks that were successfully scheduled.
+        for task in planning_result.failed_to_schedule:
+            logger.warning(f"Failed to schedule task {task.content} (id={task.id})")
+            task.labels = task.labels or []
+            if PLANNING_FAILED_LABEL not in task.labels:
+                task.labels.append(PLANNING_FAILED_LABEL)
+        
+        for task in planning_result.scheduled:
+            if task.labels is not None and PLANNING_FAILED_LABEL in task.labels:
+                task.labels.remove(PLANNING_FAILED_LABEL)
+
+        tasks = planning_result.scheduled + planning_result.failed_to_schedule
         if not tasks:
             return []
 

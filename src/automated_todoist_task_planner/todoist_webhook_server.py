@@ -38,13 +38,6 @@ from typing import Callable, Optional
 
 from fastapi import FastAPI, Header, Request
 from fastapi.responses import PlainTextResponse
-from todoist_api_python.models import Task
-
-try:
-    from .todoist_client import TodoistTaskClient
-except ImportError:  # pragma: no cover
-    from todoist_client import TodoistTaskClient
-
 
 logger = logging.getLogger(__name__)
 level_name = os.getenv("LOG_LEVEL", "INFO").upper()
@@ -52,14 +45,10 @@ logging.basicConfig(level=getattr(logging, level_name, logging.INFO))
 
 @dataclass(frozen=True)
 class TodoistWebhookConfig:
-    api_token: str
     client_secret: str
     host: str = "0.0.0.0"
     port: int = 8080
-    path: str = "/payload"
-    # Search query passed to Todoist to fetch tasks due in the next N days.
-    # Todoist query is described here: https://developer.todoist.com/sync/v9/#queries
-    upcoming_query: str = "(overdue | 14 days)"
+    path: str = "/"
 
 
 class TodoistWebhookServer:
@@ -67,36 +56,31 @@ class TodoistWebhookServer:
 
     def __init__(
         self,
-        api_token: str,
         client_secret: str,
-        on_tasks_fetched: Callable[[list[Task]], None],
+        on_webhook: Callable[[], None],
         integration_user_id: str,
         host: str = "0.0.0.0",
         port: int = 8080,
-        path: str = "/payload",
-        upcoming_days_query: str = "(overdue | 14 days)",
+        path: str = "/",
     ) -> None:
         """Create a new webhook server.
 
         Args:
-            api_token: Todoist API token (OAuth access token) to query tasks.
             client_secret: Todoist app client secret; used to validate webhook signatures.
-            on_tasks_fetched: Callback invoked with the list of tasks fetched from Todoist.
+            on_webhook: Callback invoked when a webhook is received.
+            integration_user_id: ID of the integration user to ignore events from.
             host: Host to bind the HTTP server to.
             port: Port to run the HTTP server on.
             path: HTTP path on which Todoist will send webhook events.
             upcoming_days_query: Todoist query used to fetch tasks (e.g. "(overdue | 14 days)").
         """
         self._config = TodoistWebhookConfig(
-            api_token=api_token,
             client_secret=client_secret,
             host=host,
             port=port,
             path=path,
-            upcoming_query=upcoming_days_query,
         )
-        self._todoist_client = TodoistTaskClient(api_token=api_token)
-        self._on_tasks_fetched = on_tasks_fetched
+        self._on_webhook = on_webhook
         self._integration_user_id = integration_user_id
 
         self._app = FastAPI()
@@ -110,8 +94,8 @@ class TodoistWebhookServer:
             x_todoist_delivery_id: Optional[str] = Header(None),
         ) -> PlainTextResponse:
             body = await request.body()
-            logger.debug("Received webhook request with body=%s", body) # TEMP
-            logger.debug("Received webhook delivery id=%s", x_todoist_delivery_id)
+            # logger.debug("Received webhook request with body=%s", body) # TEMP
+            # logger.debug("Received webhook delivery id=%s", x_todoist_delivery_id)
 
             if not x_todoist_hmac_sha256:
                 logger.warning("Missing X-Todoist-Hmac-SHA256 header")
@@ -137,18 +121,8 @@ class TodoistWebhookServer:
                 )
                 return PlainTextResponse("OK", status_code=200)
 
-            try:
-                tasks = self._todoist_client.fetch_tasks_with_duration_due_soon_or_overdue(
-                    query=self._config.upcoming_query
-                )
-            except Exception as exc:  # pragma: no cover
-                logger.exception("Failed to fetch tasks from Todoist: %s", exc)
-                return PlainTextResponse("OK", status_code=200)
-
-            try:
-                self._on_tasks_fetched(tasks)
-            except Exception:  # pragma: no cover
-                logger.exception("Callback raised an exception")
+            # NOTE: this might cause problem if the callback takes a long time to execute, so Todoist will timeout the request and retry it later.
+            self._on_webhook()
 
             return PlainTextResponse("OK", status_code=200)
 

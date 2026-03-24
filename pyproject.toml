@@ -1,28 +1,22 @@
-[build-system]
-requires = ["setuptools>=68", "wheel"]
-build-backend = "setuptools.build_meta"
-
 [project]
 name = "automated-todoist-task-planner"
 version = "0.1.0"
-description = "Automated Todoist task planner"
-readme = "README.md"
-requires-python = ">=3.10"
+description = "Default template for PDM package"
 authors = [
-  { name = "Your Name" }
+    {name = "Matěj Kubík", email = "kubik.m@icloud.com"},
 ]
-dependencies = []
+dependencies = [
+    "fastapi==0.135.*",
+    "uvicorn[standard]==0.42.*",
+    "todoist-api-python==3.2.*",
+]
+requires-python = "==3.13.*"
+readme = "README.md"
+license = {text = "MIT"}
 
-[project.scripts]
-todoist-planner = "automated_todoist_task_planner.main:main"
+[tool.pdm.scripts]
+start.cmd = 'python -m src.automated_todoist_task_planner.main --api-token "$TODOIST_API_TOKEN" --client-secret "$TODOIST_CLIENT_SECRET" --integration-user-id "$TODOIST_INTEGRATION_USER_ID"'
+start.env_file = ".env"
 
-[tool.setuptools]
-package-dir = {"" = "src"}
-
-[tool.setuptools.packages.find]
-where = ["src"]
-
-[tool.pytest.ini_options]
-testpaths = ["tests"]
-pythonpath = ["src"]
-addopts = "-q"
+[tool.pdm]
+distribution = false

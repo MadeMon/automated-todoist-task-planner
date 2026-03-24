@@ -5,79 +5,61 @@ from __future__ import annotations
 import argparse
 import logging
 import os
+from typing import cast
 
-from todoist_api_python.models import Task
+from .planners import DeadlinePriorityPlanner
 
-from .mock_planner import MockPlanner
 from .todoist_client import TodoistTaskClient
 from .todoist_webhook_server import TodoistWebhookServer
+
+UPCOMING_TASKS_QUERY = "(overdue | 14 days)"
+
 
 
 def _configure_logging() -> None:
     level_name = os.getenv("LOG_LEVEL", "INFO").upper()
     logging.basicConfig(level=getattr(logging, level_name, logging.INFO))
 
-
-def _build_argument_parser() -> argparse.ArgumentParser:
-    parser = argparse.ArgumentParser(
-        description="Run webhook receiver + mock planner + selective Todoist updates."
-    )
-    parser.add_argument("--api-token", required=True, help="Todoist API token")
-    parser.add_argument(
-        "--client-secret",
-        required=True,
-        help="Todoist app client secret for verifying webhook requests",
-    )
-    parser.add_argument("--host", default="0.0.0.0", help="Host to bind the server to")
-    parser.add_argument("--port", type=int, default=8080, help="Port to run the server on")
-    parser.add_argument(
-        "--path",
-        default="/payload",
-        help="HTTP path on which Todoist webhook events are received",
-    )
-    parser.add_argument(
-        "--query",
-        default="(overdue | 14 days)",
-        help="Todoist query used to fetch candidate tasks",
-    )
-    parser.add_argument(
-        "--integration-user-id",
-        required=True,
-        help="ID of the integration user to ignore events from",
-    )
-    return parser
-
+def _verify_env_vars() -> None:
+    required_vars = ["TODOIST_API_TOKEN", "TODOIST_CLIENT_SECRET", "TODOIST_INTEGRATION_USER_ID"]
+    missing_vars = [var for var in required_vars if not os.getenv(var)]
+    if missing_vars:
+        raise EnvironmentError(f"Missing required environment variables: {', '.join(missing_vars)}")
 
 def main() -> None:
     _configure_logging()
     logger = logging.getLogger(__name__)
+    _verify_env_vars()
 
-    parser = _build_argument_parser()
-    args = parser.parse_args()
+    client_secret = cast(str, os.getenv("TODOIST_CLIENT_SECRET"))
+    api_token = cast(str, os.getenv("TODOIST_API_TOKEN"))
+    integration_user_id = cast(str, os.getenv("TODOIST_INTEGRATION_USER_ID"))
 
-    # CONTINUE: implement the actual planner
-    planner = MockPlanner()
-    todoist_client = TodoistTaskClient(api_token=args.api_token)
+    planner = DeadlinePriorityPlanner()
+    todoist_client = TodoistTaskClient(api_token=api_token)
 
-    def on_tasks_fetched(tasks: list[Task]) -> None:
-        planned_tasks = planner.plan(tasks)
-        updated_tasks = todoist_client.update_tasks(planned_tasks)
+    def on_webhook() -> None:
+        tasks = todoist_client.fetch_tasks_with_duration_due_soon_or_overdue(
+            query=UPCOMING_TASKS_QUERY
+        )
+        
+        planning_result = planner.plan(tasks)
+        updated_tasks = todoist_client.update_tasks(planning_result)
         logger.info(
-            "Fetched %d tasks, planned %d tasks, applied %d updates",
+            "Fetched %d tasks, scheduled %d tasks, failed %d tasks, applied %d updates",
             len(tasks),
-            len(planned_tasks),
+            len(planning_result.scheduled),
+            len(planning_result.failed_to_schedule),
             len(updated_tasks),
         )
 
     server = TodoistWebhookServer(
-        api_token=args.api_token,
-        client_secret=args.client_secret,
-        on_tasks_fetched=on_tasks_fetched,
-        host=args.host,
-        port=args.port,
-        path=args.path,
-        upcoming_days_query=args.query,
-        integration_user_id=args.integration_user_id,
+        client_secret=client_secret,
+        on_webhook=on_webhook,
+        host=os.getenv("TODOIST_HOST", "0.0.0.0"),
+        port=int(os.getenv("TODOIST_PORT", 8080)),
+        path=os.getenv("TODOIST_PATH", "/"),
+        integration_user_id=integration_user_id,
     )
     server.run()
 
