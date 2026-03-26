@@ -2,18 +2,31 @@
 
 from __future__ import annotations
 
-import argparse
 import logging
 import os
-from typing import cast
+from typing import Iterable, cast
 
-from .planners import DeadlinePriorityPlanner
+from todoist_api_python.models import Task
+
+from .planners.base_planner import BasePlanner
+from .planners.mock_planner import MockPlanner
+from .todoist_helper import is_task_fixed
+
 
 from .todoist_client import TodoistTaskClient
 from .todoist_webhook_server import TodoistWebhookServer
 
-UPCOMING_TASKS_QUERY = "(overdue | 14 days)"
+UPCOMING_TASKS_QUERY = "!today & (overdue | 14 days)"
 
+def _partition_tasks(tasks: Iterable[Task]) -> tuple[list[Task], list[Task]]:
+    fixed: list[Task] = []
+    flexible: list[Task] = []
+    for task in tasks:
+        if is_task_fixed(task):
+            fixed.append(task)
+        else:
+            flexible.append(task)
+    return fixed, flexible
 
 
 def _configure_logging() -> None:
@@ -35,20 +48,22 @@ def main() -> None:
     api_token = cast(str, os.getenv("TODOIST_API_TOKEN"))
     integration_user_id = cast(str, os.getenv("TODOIST_INTEGRATION_USER_ID"))
 
-    planner = DeadlinePriorityPlanner()
+    planner: BasePlanner = MockPlanner()
     todoist_client = TodoistTaskClient(api_token=api_token)
 
     def on_webhook() -> None:
         tasks = todoist_client.fetch_tasks_with_duration_due_soon_or_overdue(
             query=UPCOMING_TASKS_QUERY
         )
+
+        fixed_tasks, flexible_tasks = _partition_tasks(tasks)
         
-        planning_result = planner.plan(tasks)
+        planning_result = planner.plan(flexible_tasks,fixed_tasks)
         updated_tasks = todoist_client.update_tasks(planning_result)
         logger.info(
             "Fetched %d tasks, scheduled %d tasks, failed %d tasks, applied %d updates",
             len(tasks),
-            len(planning_result.scheduled),
+            len([scheduled_task for day in planning_result.schedule.days for scheduled_task in day]),
             len(planning_result.failed_to_schedule),
             len(updated_tasks),
         )

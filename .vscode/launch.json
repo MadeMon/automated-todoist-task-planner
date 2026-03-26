@@ -1,0 +1,34 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Planner: Run Webhook App",
+            "type": "debugpy",
+            "request": "launch",
+            "module": "automated_todoist_task_planner.main",
+            "args": [
+                "--api-token",
+                "${env:TODOIST_API_TOKEN}",
+                "--client-secret",
+                "${env:TODOIST_CLIENT_SECRET}",
+                "--integration-user-id",
+                "${env:TODOIST_INTEGRATION_USER_ID}",
+                "--host",
+                "0.0.0.0",
+                "--port",
+                "8080",
+                "--path",
+                "/"
+            ],
+            "env": {
+                "LOG_LEVEL": "INFO",
+                "PYTHONPATH": "${workspaceFolder}/src"
+            },
+            "envFile": "${workspaceFolder}/.env",
+            "justMyCode": true,
+        }
+    ]
+}

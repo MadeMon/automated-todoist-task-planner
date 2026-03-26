@@ -2,12 +2,12 @@
 
 from __future__ import annotations
 
-from datetime import date, datetime
+from datetime import datetime
 import logging
 from typing import Any
 
 from todoist_api_python.api import TodoistAPI
-from todoist_api_python.models import Due, Task
+from todoist_api_python.models import Task
 
 from .planners.base_planner import PlanningResult
 
@@ -20,17 +20,16 @@ PLANNING_FAILED_LABEL = "planning_failed"
 class TodoistTaskClient:
     """Adapter over Todoist SDK calls used by this project."""
 
-    _FETCH_QUERY = "(overdue | 14 days)"
     _MAX_IDS_PER_REQUEST = 200
 
     def __init__(self, api_token: str) -> None:
         self._api = TodoistAPI(token=api_token)
 
     def fetch_tasks_with_duration_due_soon_or_overdue(
-        self, query: str | None = None
+        self, query: str
     ) -> list[Task]:
         """Return tasks that are overdue or due in next two weeks and have duration."""
-        active_query = query or self._FETCH_QUERY
+        active_query = query
         tasks = [
             task
             for page in self._api.filter_tasks(query=active_query)
@@ -42,38 +41,42 @@ class TodoistTaskClient:
     def update_tasks(self, planning_result: PlanningResult) -> list[Task]:
         """Update only tasks whose due or labels changed compared to Todoist state."""
 
+        all_task_ids = [task.id for task in [scheduled_task.task for scheduled_task in planning_result.schedule.get_scheduled_tasks()] +  planning_result.failed_to_schedule]
+        current_by_id = self._fetch_current_tasks_by_id(task_ids=all_task_ids)
+
         # Add a "planning_failed" label to tasks that failed to schedule and remove it from tasks that were successfully scheduled.
         for task in planning_result.failed_to_schedule:
             logger.warning(f"Failed to schedule task {task.content} (id={task.id})")
-            task.labels = task.labels or []
-            if PLANNING_FAILED_LABEL not in task.labels:
-                task.labels.append(PLANNING_FAILED_LABEL)
-        
-        for task in planning_result.scheduled:
-            if task.labels is not None and PLANNING_FAILED_LABEL in task.labels:
-                task.labels.remove(PLANNING_FAILED_LABEL)
-
-        tasks = planning_result.scheduled + planning_result.failed_to_schedule
-        if not tasks:
-            return []
-
-        current_by_id = self._fetch_current_tasks_by_id(task_ids=[task.id for task in tasks])
-
-        # TODO update the tasks in batch call
-        updated_tasks: list[Task] = []
-        for candidate in tasks:
-            current_task = current_by_id.get(candidate.id)
+            current_task = current_by_id.get(task.id)
             if current_task is None:
                 logger.warning(
-                    "Skipping task id=%s because it was not found in Todoist", candidate.id
+                    "Skipping task id=%s because it was not found in Todoist", task.id
                 )
                 continue
 
-            update_payload = self._build_update_payload(current=current_task, desired=candidate)
+            labels = current_task.labels or []
+            if PLANNING_FAILED_LABEL not in labels:
+                labels.append(PLANNING_FAILED_LABEL)
+                self._api.update_task(task.id, labels=labels)
+
+        # TODO update the tasks in batch call
+        updated_tasks: list[Task] = []
+        for scheduled_task in planning_result.schedule.get_scheduled_tasks():
+            current_task = current_by_id.get(scheduled_task.task.id)
+            if current_task is None:
+                logger.warning(
+                    "Skipping task id=%s because it was not found in Todoist", scheduled_task.task.id
+                )
+                continue
+
+            labels = None
+            if current_task.labels is not None and PLANNING_FAILED_LABEL in current_task.labels:
+                labels = [label for label in current_task.labels if label != PLANNING_FAILED_LABEL]
+            update_payload = self._build_update_payload(current=current_task, labels=labels, scheduled_due=scheduled_task.start)
             if not update_payload:
                 continue
 
-            updated_task = self._api.update_task(candidate.id, **update_payload)
+            updated_task = self._api.update_task(scheduled_task.task.id, **update_payload)
             updated_tasks.append(updated_task)
 
         return updated_tasks
@@ -90,53 +93,13 @@ class TodoistTaskClient:
 
         return current_by_id
 
-    def _build_update_payload(self, current: Task, desired: Task) -> dict[str, Any]:
+    def _build_update_payload(self, current: Task, labels: list[str] | None, scheduled_due: datetime) -> dict[str, Any]:
         payload: dict[str, Any] = {}
 
-        if self._labels_changed(current.labels, desired.labels):
-            payload["labels"] = desired.labels or []
+        if scheduled_due is not None and (current.due is None or current.due.date.isoformat() != scheduled_due.isoformat()):
+            payload["due_datetime"] = scheduled_due
 
-        if self._due_changed(current.due, desired.due):
-            payload.update(self._due_update_fields(desired.due))
+        if labels is not None:
+            payload["labels"] = labels
 
         return payload
-
-    @staticmethod
-    def _labels_changed(current: list[str] | None, desired: list[str] | None) -> bool:
-        return sorted(current or []) != sorted(desired or [])
-
-    @staticmethod
-    def _due_changed(current: Due | None, desired: Due | None) -> bool:
-        return TodoistTaskClient._normalize_due(current) != TodoistTaskClient._normalize_due(
-            desired
-        )
-
-    @staticmethod
-    def _normalize_due(due: Due | None) -> tuple[str | None, str | None, str | None, bool | None, str | None] | None:
-        if due is None:
-            return None
-
-        due_date = due.date
-        if hasattr(due_date, "isoformat"):
-            due_date_text = due_date.isoformat()
-        else:
-            due_date_text = str(due_date)
-
-        return (due_date_text, due.string, due.lang, due.is_recurring, due.timezone)
-
-    @staticmethod
-    def _due_update_fields(due: Due | None) -> dict[str, Any]:
-        if due is None:
-            return {"due_string": "no date"}
-
-        # Recurring due dates are best represented by Todoist's natural language string.
-        if due.is_recurring and due.string:
-            return {"due_string": due.string}
-
-        due_value = due.date
-        if isinstance(due_value, datetime):
-            return {"due_datetime": due_value}
-        if isinstance(due_value, date):
-            return {"due_date": due_value}
-
-        return {"due_string": due.string}
