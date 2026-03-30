@@ -5,10 +5,18 @@
     "version": "0.2.0",
     "configurations": [
         {
+            "name": "Reset Todoist",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "scripts/reset_pa026_playground_tasks.py",
+            "console": "integratedTerminal",
+            "envFile": "${workspaceFolder}/.env"
+        },
+        {
             "name": "Planner: Run Webhook App",
             "type": "debugpy",
             "request": "launch",
-            "module": "automated_todoist_task_planner.main",
+            "module": "src.automated_todoist_task_planner.main",
             "args": [
                 "--api-token",
                 "${env:TODOIST_API_TOKEN}",
@@ -25,10 +33,16 @@
             ],
             "env": {
                 "LOG_LEVEL": "INFO",
-                "PYTHONPATH": "${workspaceFolder}/src"
             },
             "envFile": "${workspaceFolder}/.env",
+            "autoReload": {
+                "enable": true,
+                "include": [
+                    "**/*.py",
+                    "**/*.pyw"
+                ]
+            },
             "justMyCode": true,
-        }
+        },
     ]
 }

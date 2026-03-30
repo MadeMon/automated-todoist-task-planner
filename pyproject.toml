@@ -10,6 +10,7 @@ dependencies = [
     "uvicorn[standard]==0.42.*",
     "todoist-api-python==3.2.*",
     "debugpy>=1.8.20",
+    "alns>=7.0.0",
 ]
 requires-python = "==3.14.*"
 readme = "README.md"
@@ -18,6 +19,8 @@ license = {text = "MIT"}
 [tool.pdm.scripts]
 start.cmd = 'python -m src.automated_todoist_task_planner.main --api-token "$TODOIST_API_TOKEN" --client-secret "$TODOIST_CLIENT_SECRET" --integration-user-id "$TODOIST_INTEGRATION_USER_ID"'
 start.env_file = ".env"
+reset.cmd = 'python -m scripts.reset_pa026_playground_tasks'
+reset.env_file = ".env"
 
 [tool.pdm]
 distribution = false
