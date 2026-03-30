@@ -2,7 +2,6 @@ from __future__ import annotations
 
 from copy import copy
 from datetime import datetime, timedelta
-from math import e
 from alns import State
 
 from todoist_api_python.models import Task
@@ -179,7 +178,6 @@ def simple_heuristic_repair(state: ProblemState, rng: rnd.Generator) -> ProblemS
         except ValueError:
             continue
 
-        print("Scheduled task", task.content, "to", schedule.days[0][-1].start)
 
     return state
 
@@ -238,9 +236,6 @@ def regret_repair(state: ProblemState, rng: rnd.Generator) -> ProblemState:
         if best_task is None or best_day is None or best_slot is None:
             break
 
-        print(
-            f"Best task to schedule is '{best_task.content}' with regret {best_regret}."
-        )
         scheduled_task = ScheduledTask(
             task=best_task,
             start=best_slot,
@@ -301,14 +296,15 @@ class LNSPlanner(BasePlanner):
 
         # Create ALNS and add one or more destroy and repair operators
         alns = ALNS(rnd.default_rng(seed=42))
+        alns.on_better(lambda state,rng: print(f"[{datetime.now()}]New best solution with objective {state.objective()}"))
         alns.add_destroy_operator(random_destroy)
         # alns.add_repair_operator(simple_heuristic_repair)
         alns.add_repair_operator(regret_repair)
 
         # Configure ALNS
         select = RandomSelect(num_destroy=1, num_repair=1)  # see alns.select for others
-        accept = HillClimbing()  # see alns.accept for others
-        stop = MaxRuntime(60)  # 60 seconds; see alns.stop for others
+        accept = HillClimbing()  # TODO see alns.accept for other acceptance criteria, e.g., simulated annealing or record to record
+        stop = MaxRuntime(60)  # TODO use more clever stopping criterion
 
         # Run the ALNS algorithm
         result = alns.iterate(init_sol, select, accept, stop)
