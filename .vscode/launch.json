@@ -5,6 +5,13 @@
     "version": "0.2.0",
     "configurations": [
         {
+            "name": "Tests",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "tests/test.py",
+            "console": "integratedTerminal"
+        },
+        {
             "name": "Reset Todoist",
             "type": "debugpy",
             "request": "launch",
@@ -16,7 +23,7 @@
             "name": "Planner: Run Webhook App",
             "type": "debugpy",
             "request": "launch",
-            "module": "src.automated_todoist_task_planner.main",
+            "module": "main",
             "args": [
                 "--api-token",
                 "${env:TODOIST_API_TOKEN}",
