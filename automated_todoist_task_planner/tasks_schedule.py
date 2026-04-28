@@ -1,7 +1,12 @@
 from datetime import datetime, timedelta, time
 from typing import List, TYPE_CHECKING, Hashable
 
-from .todoist_helper import get_task_due_date, get_task_duration_minutes
+from .todoist_helper import (
+    get_task_deadline_date,
+    get_task_due_date,
+    get_task_duration_minutes,
+    is_task_fixed,
+)
 from .scheduled_task import ScheduledTask
 
 if TYPE_CHECKING:
@@ -328,14 +333,19 @@ class TasksSchedule:
             f"in any of the {self.num_days} days"
         )
 
-    def get_scheduled_tasks(self) -> List[ScheduledTask]:
+    def get_scheduled_tasks(self, include_fixed: bool = True) -> List[ScheduledTask]:
         """
         Get a list of all scheduled tasks across all days.
 
         Returns:
             List of ScheduledTask objects that are currently scheduled
         """
-        return [task for day in self.days for task in day]
+        return [
+            task
+            for day in self.days
+            for task in day
+            if include_fixed or not is_task_fixed(task.task)
+        ]
 
     def get_slot_per_every_day(
         self,
@@ -355,16 +365,16 @@ class TasksSchedule:
         schedule_before_day = self.num_days
 
         if respect_deadline:
-            task_deadline = get_task_due_date(task)
+            task_deadline = get_task_deadline_date(task)
             if task_deadline is not None:
-                if task_deadline.date() < datetime.today().date():
+                if task_deadline < self.start_date:
                     raise ValueError(
                         f"Task '{task.content}' has a past deadline and cannot be scheduled"
                     )
                 else:
                     schedule_before_day = min(
                         schedule_before_day,
-                        (task_deadline.date() - datetime.today().date()).days + 1,
+                        (task_deadline - self.start_date).days + 1,
                     )
 
         available_slots = []

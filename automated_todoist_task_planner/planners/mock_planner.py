@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 from copy import deepcopy
+from datetime import datetime
 from typing import TYPE_CHECKING
 
 from todoist_api_python.models import Task
@@ -18,6 +19,8 @@ class MockPlanner(BasePlanner):
 
     def _plan(
         self,
+        planning_from_date: datetime,
+        planning_to_date: datetime,
         schedule: TasksSchedule,
         flexible_tasks: list[Task],
         fixed_tasks: list[Task],

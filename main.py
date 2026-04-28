@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import asyncio
 from datetime import datetime, time, timedelta
 import logging
 import os
@@ -10,12 +11,17 @@ from typing import Iterable, cast
 from todoist_api_python.models import Task
 
 
-from .planners import BasePlanner, HeuristicPlanner, MockPlanner, LNSPlanner
-from .todoist_helper import is_task_fixed
+from automated_todoist_task_planner.planners import (
+    BasePlanner,
+    HeuristicPlanner,
+    MockPlanner,
+    LNSPlanner,
+)
+from automated_todoist_task_planner.todoist_helper import is_task_fixed
 
 
-from .todoist_client import TodoistTaskClient
-from .todoist_webhook_server import TodoistWebhookServer
+from automated_todoist_task_planner.todoist_client import TodoistTaskClient
+from automated_todoist_task_planner.todoist_webhook_server import TodoistWebhookServer
 
 UPCOMING_TASKS_QUERY = "!today & (overdue | 14 days)"
 
@@ -75,12 +81,12 @@ def main() -> None:
     planner: BasePlanner = LNSPlanner()
     todoist_client = TodoistTaskClient(api_token=api_token)
 
-    def on_webhook() -> None:
+    async def _run_planning_cycle() -> None:
         planning_from_date = datetime.now() + timedelta(
             days=PLANNING_FROM_DATE_OFFSET_DAYS
         )
 
-        tasks = todoist_client.fetch_tasks_with_duration_due_soon_or_overdue(
+        tasks = await todoist_client.fetch_tasks_with_duration_due_soon_or_overdue(
             query=UPCOMING_TASKS_QUERY
         )
 
@@ -94,7 +100,7 @@ def main() -> None:
             flexible_tasks=flexible_tasks,
             fixed_tasks=fixed_tasks,
         )
-        updated_tasks = todoist_client.update_tasks(planning_result)
+        updated_tasks = await todoist_client.update_tasks(planning_result)
         logger.info(
             "Fetched %d tasks, scheduled %d tasks, failed %d tasks, applied %d updates",
             len(tasks),
@@ -111,7 +117,7 @@ def main() -> None:
 
     server = TodoistWebhookServer(
         client_secret=client_secret,
-        on_webhook=on_webhook,
+        on_webhook=_run_planning_cycle,
         host=os.getenv("TODOIST_HOST", "0.0.0.0"),
         port=int(os.getenv("TODOIST_PORT", 8080)),
         path=os.getenv("TODOIST_PATH", "/"),

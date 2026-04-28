@@ -39,6 +39,8 @@ class HeuristicPlanner(BasePlanner):
 
     def _plan(
         self,
+        planning_from_date: datetime.datetime,
+        planning_to_date: datetime.datetime,
         schedule: TasksSchedule,
         flexible_tasks: list[Task],
         fixed_tasks: list[Task],

@@ -1,0 +1,102 @@
+from __future__ import annotations
+
+from datetime import datetime, timedelta
+from typing import Iterable
+
+from automated_todoist_task_planner.planners import (
+    PlanningResult,
+    compute_task_objective_contribution,
+)
+from automated_todoist_task_planner.scheduled_task import ScheduledTask
+from automated_todoist_task_planner.tasks_schedule import TasksSchedule
+from automated_todoist_task_planner.todoist_helper import get_task_duration_minutes
+
+
+def build_task_snapshot(tasks: Iterable[object]) -> dict[int, dict[str, object]]:
+    snapshot: dict[int, dict[str, object]] = {}
+    for task in tasks:
+        deadline_date = None
+        if getattr(task, "deadline", None) is not None:
+            deadline_date = task.deadline.date
+        snapshot[task.id] = {
+            "content": task.content,
+            "description": task.description,
+            "priority": task.priority,
+            "deadline": deadline_date,
+        }
+    return snapshot
+
+
+def assert_no_overlapping_tasks(schedule: TasksSchedule) -> None:
+    for day_index, day_tasks in enumerate(schedule.days):
+        sorted_tasks = sorted(day_tasks, key=lambda scheduled: scheduled.start)
+        for left, right in zip(sorted_tasks, sorted_tasks[1:]):
+            if left.end > right.start:
+                raise AssertionError(
+                    "Overlapping tasks detected in day "
+                    f"{day_index}: {left.task.content} overlaps {right.task.content}"
+                )
+
+
+def assert_task_properties_preserved(
+    result: PlanningResult, snapshot: dict[int, dict[str, object]]
+) -> None:
+    scheduled_tasks = result.schedule.get_scheduled_tasks(include_fixed=True)
+    for scheduled in scheduled_tasks:
+        _assert_task_matches_snapshot(scheduled.task, snapshot)
+
+    for task in result.failed_to_schedule:
+        _assert_task_matches_snapshot(task, snapshot)
+
+
+def _assert_task_matches_snapshot(
+    task: object, snapshot: dict[int, dict[str, object]]
+) -> None:
+    if task.id not in snapshot:
+        raise AssertionError(f"Task {task.id} missing from snapshot")
+
+    expected = snapshot[task.id]
+    deadline_date = None
+    if getattr(task, "deadline", None) is not None:
+        deadline_date = task.deadline.date
+
+    if task.content != expected["content"]:
+        raise AssertionError("Task content changed")
+    if task.description != expected["description"]:
+        raise AssertionError("Task description changed")
+    if task.priority != expected["priority"]:
+        raise AssertionError("Task priority changed")
+    if deadline_date != expected["deadline"]:
+        raise AssertionError("Task deadline changed")
+
+
+def compute_objective(result: PlanningResult, planning_to_date: datetime) -> float:
+    objective_value = 0.0
+
+    for scheduled_task in result.schedule.get_scheduled_tasks(include_fixed=True):
+        objective_value += compute_task_objective_contribution(scheduled_task)
+
+    for task in result.failed_to_schedule:
+        end = planning_to_date + timedelta(minutes=get_task_duration_minutes(task))
+        objective_value += compute_task_objective_contribution(
+            ScheduledTask(task=task, start=planning_to_date, end=end)
+        )
+
+    return -objective_value
+
+
+def print_search_statistics(result: PlanningResult, test_name: str) -> str:
+    stats = result.search_statistics
+    if stats is None:
+        message = f"[STATS] {test_name} search_statistics=None"
+        print(message)
+        return message
+
+    message = (
+        f"[STATS] {test_name} best_iter={stats.best_solution_iteration} "
+        f"final_obj={stats.final_solution_objective:.4f} "
+        f"time_to_best={stats.time_to_best_solution_seconds:.4f}s "
+        f"accepted={len(stats.accepted_solutions)}"
+    )
+    print(message)
+    return message

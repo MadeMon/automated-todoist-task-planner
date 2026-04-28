@@ -34,9 +34,9 @@ import hmac
 import logging
 from dataclasses import dataclass
 import os
-from typing import Callable, Optional
+from typing import Awaitable, Callable, Optional
 
-from fastapi import FastAPI, Header, Request
+from fastapi import BackgroundTasks, FastAPI, Header, Request
 from fastapi.responses import PlainTextResponse
 
 logger = logging.getLogger(__name__)
@@ -57,7 +57,7 @@ class TodoistWebhookServer:
     def __init__(
         self,
         client_secret: str,
-        on_webhook: Callable[[], None],
+        on_webhook: Callable[[], Awaitable[None]],
         integration_user_id: str,
         host: str = "0.0.0.0",
         port: int = 8080,
@@ -90,6 +90,7 @@ class TodoistWebhookServer:
         @self._app.post(self._config.path)
         async def webhook_endpoint(
             request: Request,
+            background_tasks: BackgroundTasks,
             x_todoist_hmac_sha256: Optional[str] = Header(None),
             x_todoist_delivery_id: Optional[str] = Header(None),
         ) -> PlainTextResponse:
@@ -122,7 +123,7 @@ class TodoistWebhookServer:
                 return PlainTextResponse("OK", status_code=200)
 
             # NOTE: this might cause problem if the callback takes a long time to execute, so Todoist will timeout the request and retry it later.
-            self._on_webhook()
+            background_tasks.add_task(self._on_webhook)
 
             return PlainTextResponse("OK", status_code=200)
 

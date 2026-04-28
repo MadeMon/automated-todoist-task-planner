@@ -1,0 +1,103 @@
+{
+  "project_name": "PA026 Playground",
+  "tasks": [
+    {
+      "content": "Priority 1 deadline",
+      "priority": 1,
+      "due": {
+        "offset_days": 1,
+        "start_time": "09:00",
+        "end_time": "11:00"
+      },
+      "deadline": {
+        "offset_days": 2
+      },
+      "copies": 5
+    },
+    {
+      "content": "Fixed",
+      "priority": 4,
+      "labels": ["fixed"],
+      "due": {
+        "offset_days": 1,
+        "start_time": "10:00",
+        "end_time": "11:00"
+      },
+      "copies": 1
+    },
+    {
+      "content": "Fixed",
+      "priority": 4,
+      "labels": ["fixed"],
+      "due": {
+        "offset_days": 2,
+        "start_time": "12:00",
+        "end_time": "13:00"
+      },
+      "copies": 1
+    },
+    {
+      "content": "Fixed",
+      "priority": 4,
+      "labels": ["fixed"],
+      "due": {
+        "offset_days": 2,
+        "start_time": "15:00",
+        "end_time": "16:00"
+      },
+      "copies": 1
+    },
+    {
+      "content": "Priority 2 deadline",
+      "priority": 2,
+      "due": {
+        "offset_days": 1,
+        "start_time": "09:00",
+        "end_time": "11:00"
+      },
+      "deadline": {
+        "offset_days": 1
+      },
+      "copies": 5
+    },
+        {
+      "content": "Priority 1 later deadline",
+      "priority": 1,
+      "due": {
+        "offset_days": 1,
+        "start_time": "09:00",
+        "end_time": "11:00"
+      },
+      "deadline": {
+        "offset_days": 4
+      },
+      "copies": 5
+    },
+    {
+      "content": "Priority 2 later deadline",
+      "priority": 2,
+      "due": {
+        "offset_days": 1,
+        "start_time": "09:00",
+        "end_time": "11:00"
+      },
+      "deadline": {
+        "offset_days": 3
+      },
+      "copies": 5
+    },
+    {
+      "content": "Priority 2 later deadline short",
+      "priority": 2,
+      "due": {
+        "offset_days": 1,
+        "start_time": "09:00",
+        "end_time": "10:00"
+      },
+      "deadline": {
+        "offset_days": 3
+      },
+      "copies": 1
+    }
+  ]
+}

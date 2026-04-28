@@ -7,7 +7,6 @@ if TYPE_CHECKING:
     from datetime import datetime
 
 
-
 @dataclass
 class ScheduledTask:
     start: "datetime"

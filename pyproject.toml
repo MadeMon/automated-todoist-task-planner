@@ -11,16 +11,23 @@ dependencies = [
     "todoist-api-python==3.2.*",
     "debugpy>=1.8.20",
     "alns>=7.0.0",
+    "requests>=2.33.1",
+    "mlflow>=3.11.1",
+    "matplotlib>=3.9.0",
 ]
-requires-python = "==3.14.*"
+requires-python = "==3.13.*"
 readme = "README.md"
 license = {text = "MIT"}
 
 [tool.pdm.scripts]
-start.cmd = 'python -m src.automated_todoist_task_planner.main --api-token "$TODOIST_API_TOKEN" --client-secret "$TODOIST_CLIENT_SECRET" --integration-user-id "$TODOIST_INTEGRATION_USER_ID"'
+# start.cmd = 'python -m src.automated_todoist_task_planner.main --api-token "$TODOIST_API_TOKEN" --client-secret "$TODOIST_CLIENT_SECRET" --integration-user-id "$TODOIST_INTEGRATION_USER_ID"'
+start.cmd = 'python main.py --api-token "$TODOIST_API_TOKEN" --client-secret "$TODOIST_CLIENT_SECRET" --integration-user-id "$TODOIST_INTEGRATION_USER_ID"'
 start.env_file = ".env"
-reset.cmd = 'python -m scripts.reset_pa026_playground_tasks'
-reset.env_file = ".env"
+seed.cmd = 'python -m scripts.reset_pa026_playground_tasks'
+seed.env_file = ".env"
+mlflow = "mlflow server --port 8080 --backend-store-uri sqlite:///mlruns.db"
+
+test = "python tests/test.py"
 
 [tool.pdm]
 distribution = false
