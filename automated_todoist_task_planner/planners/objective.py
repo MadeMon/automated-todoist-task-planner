@@ -1,4 +1,5 @@
 from datetime import datetime, timedelta
+import os
 
 import mlflow
 from todoist_api_python.models import Task
@@ -60,9 +61,7 @@ def objective(
     # Convert maximizing objective to minimizing
     obj = -objective_value
 
-    try:
-        mlflow.log_metric("objective", obj, step=iteration, synchronous=False)
-    except Exception:
-        pass
+    if os.getenv("LOG_TO_MLFLOW") == "1":
+        mlflow.log_metric("objective", obj, step=iteration)
 
     return obj

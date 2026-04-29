@@ -286,7 +286,7 @@ class TasksSchedule:
         return scheduled_task
 
     def schedule_task_to_first_available_slot_balance_days(
-        self, task: "Task"
+        self, task: "Task", respect_deadline: bool = False
     ) -> ScheduledTask:
         """
         Schedule a task to the first available slot across days, prioritizing
@@ -297,7 +297,7 @@ class TasksSchedule:
 
         Args:
             task: Todoist Task object (must have duration set)
-
+            respect_deadline: If True, the scheduling will respect the task's deadline.
         Returns:
             ScheduledTask object that was created and scheduled
 
@@ -315,6 +315,11 @@ class TasksSchedule:
 
         # Try to schedule task in each day, starting with most available time
         for day_idx, available_time in day_availability:
+            task_deadline_date = get_task_deadline_date(task)
+            if respect_deadline and task_deadline_date is not None:
+                task_deadline_day = (task_deadline_date - self.start_date).days
+                if day_idx > task_deadline_day:
+                    continue  # Skip days after the task's deadline
             if available_time < task_duration:
                 # If current day doesn't have enough time, no future day will either
                 raise ValueError(

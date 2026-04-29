@@ -45,7 +45,8 @@ class PlanningResult:
 class BasePlanner(ABC):
     """Abstract interface for components that schedule Todoist tasks."""
 
-    def __init__(self):
+    def __init__(self, name: str = ""):
+        self.name = name
         self._plan_tasks_from = datetime.now().date() + timedelta(
             days=1
         )  # Plan tasks starting from tomorrow to avoid scheduling tasks into already started day.
@@ -68,20 +69,14 @@ class BasePlanner(ABC):
             num_days=plan_days,
         )
 
-        try:
-            mlflow.set_experiment("automated_todoist_lns_planner")
-        except Exception:
-            pass
-
         planning_to_date = planning_from_date + timedelta(days=plan_days)
-        with mlflow.start_run(run_name=f"Planning_{datetime.now().isoformat()}"):
-            return self._plan(
-                planning_from_date,
-                planning_to_date,
-                schedule,
-                flexible_tasks,
-                fixed_tasks,
-            )
+        return self._plan(
+            planning_from_date,
+            planning_to_date,
+            schedule,
+            flexible_tasks,
+            fixed_tasks,
+        )
 
     @abstractmethod
     def _plan(

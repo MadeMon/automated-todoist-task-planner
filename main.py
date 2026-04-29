@@ -12,11 +12,9 @@ from todoist_api_python.models import Task
 
 
 from automated_todoist_task_planner.planners import (
-    BasePlanner,
-    HeuristicPlanner,
-    MockPlanner,
-    LNSPlanner,
+    BasePlanner
 )
+from automated_todoist_task_planner.planners.alns_planners import get_random_dest_regret_to_repair
 from automated_todoist_task_planner.todoist_helper import is_task_fixed
 
 
@@ -78,7 +76,7 @@ def main() -> None:
 
     # planner: BasePlanner = MockPlanner()
     # planner: BasePlanner = HeuristicPlanner()
-    planner: BasePlanner = LNSPlanner()
+    planner: BasePlanner = get_random_dest_regret_to_repair()
     todoist_client = TodoistTaskClient(api_token=api_token)
 
     async def _run_planning_cycle() -> None:

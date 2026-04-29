@@ -9,7 +9,10 @@
             "type": "debugpy",
             "request": "launch",
             "program": "tests/test.py",
-            "console": "integratedTerminal"
+            "console": "integratedTerminal",
+            "env": {
+                "LOG_TO_MLFLOW": "1",
+            }
         },
         {
             "name": "Reset Todoist",

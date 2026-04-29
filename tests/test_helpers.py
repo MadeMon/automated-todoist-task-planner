@@ -69,6 +69,29 @@ def _assert_task_matches_snapshot(
     if deadline_date != expected["deadline"]:
         raise AssertionError("Task deadline changed")
 
+def assert_all_tasks_scheduled_or_failed(result: PlanningResult) -> None:
+    scheduled_tasks = result.schedule.get_scheduled_tasks(include_fixed=True)
+    scheduled_task_ids = {scheduled.task.id for scheduled in scheduled_tasks}
+    failed_task_ids = {task.id for task in result.failed_to_schedule}
+
+    if len(scheduled_task_ids.intersection(failed_task_ids)) > 0:
+        raise AssertionError("Some tasks are both scheduled and failed to schedule")
+
+def assert_no_tasks_missing(result: PlanningResult, snapshot: dict[int, dict[str, object]]) -> None:
+    scheduled_tasks = result.schedule.get_scheduled_tasks(include_fixed=True)
+    scheduled_task_ids = {scheduled.task.id for scheduled in scheduled_tasks}
+    failed_task_ids = {task.id for task in result.failed_to_schedule}
+    all_result_task_ids = scheduled_task_ids.union(failed_task_ids)
+    snapshot_task_ids = set(snapshot.keys())
+
+    if all_result_task_ids != snapshot_task_ids:
+        missing_in_result = snapshot_task_ids - all_result_task_ids
+        extra_in_result = all_result_task_ids - snapshot_task_ids
+        raise AssertionError(
+            f"Tasks missing from result: {missing_in_result}, "
+            f"unexpected tasks in result: {extra_in_result}"
+        )
+
 
 def compute_objective(result: PlanningResult, planning_to_date: datetime) -> float:
     objective_value = 0.0

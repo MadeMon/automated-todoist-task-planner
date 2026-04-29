@@ -58,7 +58,7 @@ class HeuristicPlanner(BasePlanner):
 
         for task in planned_tasks:
             try:
-                schedule.schedule_task_to_first_available_slot_balance_days(task)
+                schedule.schedule_task_to_first_available_slot_balance_days(task, respect_deadline=True)
             except ValueError:
                 failed_to_schedule.append(task)
                 continue

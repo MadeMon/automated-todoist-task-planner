@@ -2,7 +2,7 @@
   "project_name": "PA026 Playground",
   "tasks": [
     {
-      "content": "Priority 1 deadline",
+      "content": "Deadline",
       "priority": 1,
       "due": {
         "offset_days": 1,
@@ -48,7 +48,7 @@
       "copies": 1
     },
     {
-      "content": "Priority 2 deadline",
+      "content": "Deadline",
       "priority": 2,
       "due": {
         "offset_days": 1,
