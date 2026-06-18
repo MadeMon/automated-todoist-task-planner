@@ -15,23 +15,24 @@ class ProblemState(State):
         result: PlanningResult,
         iteration: int = 0,
         last_objective: float | None = None,
+        iteration_since_last_improvement: int = 0,
     ):
         self.planning_from_date = planning_from_date
         self.planning_to_date = planning_to_date
         self.result = result
         self.iteration = iteration
+        self.iteration_since_last_improvement = iteration_since_last_improvement
         self.last_objective = last_objective
 
     def objective(self) -> float:
         obj = objective(
-            scheduled_tasks=self.result.schedule.get_scheduled_tasks(),
+            schedule=self.result.schedule,
             failed_to_schedule=self.result.failed_to_schedule,
             planning_to_date=self.planning_to_date,
             iteration=self.iteration,
         )
 
         self.last_objective = obj
-        self.iteration += 1
 
         return obj
 
@@ -42,6 +43,7 @@ class ProblemState(State):
             result=copy(self.result),
             iteration=self.iteration,
             last_objective=self.last_objective,
+            iteration_since_last_improvement=self.iteration_since_last_improvement,
         )
 
     def get_context(self):

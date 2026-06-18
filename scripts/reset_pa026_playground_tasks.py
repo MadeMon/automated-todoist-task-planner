@@ -3,6 +3,7 @@
 
 from __future__ import annotations
 
+import asyncio
 import argparse
 from dataclasses import dataclass
 from datetime import date, datetime, time, timedelta
@@ -11,7 +12,8 @@ import os
 from pathlib import Path
 from typing import Any
 
-from todoist_api_python.api import TodoistAPI
+from todoist_api_python.models import Task
+from todoist_api_python.api_async import TodoistAPIAsync
 
 
 DEFAULT_SEED_FILE = Path(__file__).with_name("pa026_playground_tasks.json")
@@ -36,27 +38,8 @@ def _minutes_between(start: time, end: time) -> int:
     end_minutes = end.hour * 60 + end.minute
     minutes = end_minutes - start_minutes
     if minutes <= 0:
-        raise ValueError("schedule.end_time must be later than schedule.start_time")
+        raise ValueError("due.end_time must be later than due.start_time")
     return minutes
-
-
-def _resolve_priority(value: str | int | None) -> int:
-    if value is None:
-        return 1
-    if isinstance(value, int):
-        if value in (1, 2, 3, 4):
-            return value
-        raise ValueError("priority integer must be one of: 1, 2, 3, 4")
-    normalized = value.strip().lower()
-    mapping = {
-        "p1": 4,
-        "p2": 3,
-        "p3": 2,
-        "p4": 1,
-    }
-    if normalized not in mapping:
-        raise ValueError("priority must be p1/p2/p3/p4 or integer 1-4")
-    return mapping[normalized]
 
 
 def _build_task_specs(tasks_raw: list[dict[str, Any]], today: date) -> list[TaskSpec]:
@@ -64,14 +47,15 @@ def _build_task_specs(tasks_raw: list[dict[str, Any]], today: date) -> list[Task
     for item in tasks_raw:
         content = str(item["content"])
         labels = [str(label) for label in item.get("labels", [])]
-        priority = _resolve_priority(item.get("priority"))
+        priority = item.get("priority", 1)
+        copies = item.get("copies", 1)
 
-        schedule = item["schedule"]
-        schedule_offset = int(schedule["offset_days"])
-        start_time = _parse_time(str(schedule["start_time"]))
-        end_time = _parse_time(str(schedule["end_time"]))
+        due = item["due"]
+        due_offset = int(due["offset_days"])
+        start_time = _parse_time(str(due["start_time"]))
+        end_time = _parse_time(str(due["end_time"]))
 
-        due_date = today + timedelta(days=schedule_offset)
+        due_date = today + timedelta(days=due_offset)
         due_datetime = datetime.combine(due_date, start_time)
         duration_minutes = _minutes_between(start_time, end_time)
 
@@ -81,44 +65,57 @@ def _build_task_specs(tasks_raw: list[dict[str, Any]], today: date) -> list[Task
             deadline_offset = int(deadline["offset_days"])
             deadline_date = today + timedelta(days=deadline_offset)
 
-        specs.append(
-            TaskSpec(
-                content=content,
-                labels=labels,
-                priority=priority,
-                due_datetime=due_datetime,
-                duration_minutes=duration_minutes,
-                deadline_date=deadline_date,
+        for _ in range(copies):
+            specs.append(
+                TaskSpec(
+                    content=content,
+                    labels=labels,
+                    priority=priority,
+                    due_datetime=due_datetime,
+                    duration_minutes=duration_minutes,
+                    deadline_date=deadline_date,
+                )
             )
-        )
 
     return specs
 
 
-def _find_project_id(api: TodoistAPI, project_name: str) -> str:
-    pages = api.search_projects(query=project_name, limit=1)
-    for page in pages:
+async def _find_project_id(api: TodoistAPIAsync, project_name: str) -> str:
+    pages = await api.search_projects(query=project_name, limit=1)
+    async for page in pages:
         for project in page:
             if project.name == project_name:
                 return str(project.id)
     raise RuntimeError(f"Project '{project_name}' not found")
 
 
-def _delete_all_project_tasks(api: TodoistAPI, project_id: str) -> int:
-    deleted = 0
-    tasks = api.get_tasks(project_id=project_id, limit=200)
+async def _get_all_project_tasks(api: TodoistAPIAsync, project_id: str) -> list[Task]:
+    tasks_pages = await api.get_tasks(project_id=project_id, limit=200)
+    tasks: list[Task] = []
 
-    for page in tasks:
+    async for page in tasks_pages:
         for task in page:
-            api.delete_task(task_id=str(task.id))
-            deleted += 1
+            tasks.append(task)
 
-    return deleted
+    return tasks
 
 
-def _create_tasks(api: TodoistAPI, project_id: str, specs: list[TaskSpec]) -> int:
-    created = 0
-    for spec in specs:
+async def _delete_tasks(api: TodoistAPIAsync, tasks: list[Task]) -> int:
+    task_ids = [str(task.id) for task in tasks]
+
+    if not task_ids:
+        return 0
+
+    await asyncio.gather(*(api.delete_task(task_id=task_id) for task_id in task_ids))
+    return len(task_ids)
+
+
+async def _create_tasks(
+    api: TodoistAPIAsync, project_id: str, specs: list[TaskSpec]
+) -> int:
+    semaphore = asyncio.Semaphore(20)
+
+    async def _create_one(spec: TaskSpec) -> None:
         kwargs: dict[str, Any] = {
             "project_id": project_id,
             "content": spec.content,
@@ -130,14 +127,16 @@ def _create_tasks(api: TodoistAPI, project_id: str, specs: list[TaskSpec]) -> in
             "deadline_date": spec.deadline_date,
         }
 
-        api.add_task(
-            **kwargs,
-        )
-        created += 1
-    return created
+        async with semaphore:
+            await api.add_task(
+                **kwargs,
+            )
+
+    await asyncio.gather(*(_create_one(spec) for spec in specs))
+    return len(specs)
 
 
-def main() -> None:
+async def async_main() -> None:
     parser = argparse.ArgumentParser(
         description=(
             "Delete all tasks in a Todoist project and recreate them from JSON with relative dates."
@@ -168,14 +167,21 @@ def main() -> None:
     today = datetime.now().date()
     specs = _build_task_specs(tasks_raw=tasks_raw, today=today)
 
-    api = TodoistAPI(token=token)
-    project_id = _find_project_id(api=api, project_name=project_name)
-    deleted = _delete_all_project_tasks(api=api, project_id=project_id)
-    created = _create_tasks(api=api, project_id=project_id, specs=specs)
+    api = TodoistAPIAsync(token=token)
+    project_id = await _find_project_id(api=api, project_name=project_name)
+    existing_tasks = await _get_all_project_tasks(api=api, project_id=project_id)
+    deleted, created = await asyncio.gather(
+        _delete_tasks(api=api, tasks=existing_tasks),
+        _create_tasks(api=api, project_id=project_id, specs=specs),
+    )
 
     print(f"Project: {project_name}")
     print(f"Deleted tasks: {deleted}")
     print(f"Created tasks: {created}")
+
+
+def main() -> None:
+    asyncio.run(async_main())
 
 
 if __name__ == "__main__":

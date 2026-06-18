@@ -1,3 +1,4 @@
+from copy import copy
 from datetime import datetime, timedelta, time
 from typing import List, TYPE_CHECKING, Hashable
 
@@ -55,6 +56,26 @@ class TasksSchedule:
 
         self.__save_fixed_tasks(fixed_tasks)
 
+    def get_start_of_planning_range(self) -> datetime:
+        """
+        Get the start datetime of the planning range.
+
+        Returns:
+            Datetime representing the start of the planning range (combination of start_date and start_time)
+        """
+        return datetime.combine(self.start_date, self.start_time)
+    
+    def get_end_of_planning_range(self) -> datetime:
+        """
+        Get the end datetime of the planning range.
+
+        Returns:
+            Datetime representing the end of the planning range (start_date + num_days combined with end_time)
+        """
+        end_date = self.start_date + timedelta(days=self.num_days)
+        return datetime.combine(end_date, self.end_time)
+        
+
     def __copy__(self):
         # Create a new instance of TasksSchedule
 
@@ -70,7 +91,7 @@ class TasksSchedule:
             for scheduled_task in self.days[day]:
                 if scheduled_task.task in self.fixed_tasks:
                     continue  # Fixed tasks are already saved in the new schedule during initialization
-                new_schedule.add_scheduled_task(day, scheduled_task)
+                new_schedule.add_scheduled_task(day, copy(scheduled_task))
 
         return new_schedule
 
@@ -113,12 +134,13 @@ class TasksSchedule:
             )
             self.add_scheduled_task(day_index, scheduled_task)
 
-    def get_available_time(self, day: int) -> int:
+    def get_available_time(self, day: int, ignore_scheduled_tasks: bool = False) -> int:
         """
         Get the available time in minutes for a specific day.
 
         Args:
             day: Day index (0-based, where 0 is the first day)
+            ignore_scheduled_tasks: Whether to ignore existing scheduled tasks when calculating available time
 
         Returns:
             Number of available minutes in the day
@@ -131,18 +153,26 @@ class TasksSchedule:
 
         # Calculate total scheduled minutes in the day
         scheduled_minutes = sum(
-            int((task.end - task.start).total_seconds() / 60) for task in self.days[day]
+            int((sched_task.end - sched_task.start).total_seconds() / 60) if not ignore_scheduled_tasks or is_task_fixed(sched_task.task) else 0  for sched_task in self.days[day]
         )
 
         return self.total_minutes_per_day - scheduled_minutes
 
-    def get_first_available_slot_in_day(self, day: int, task: "Task") -> datetime:
+    def get_first_available_slot_in_day(
+        self,
+        day: int,
+        task: "Task",
+        ignore_scheduled_tasks: bool = False,
+        ignore_task: "Task | None" = None,
+    ) -> datetime:
         """
         Get the first available slot for a task in a specific day.
 
         Args:
             day: Day index (0-based)
             task: Todoist Task object (must have duration set)
+            ignore_scheduled_tasks: Whether to ignore existing scheduled tasks when finding available slots
+            ignore_task: Task to ignore when checking occupied slots (typically the task being evaluated)
 
         Returns:
             Datetime of the first available slot for the task
@@ -156,14 +186,25 @@ class TasksSchedule:
 
         task_duration = get_task_duration_minutes(task)
 
-        if task_duration > self.get_available_time(day):
+        available_time = self.get_available_time(day, ignore_scheduled_tasks=ignore_scheduled_tasks)
+        if task_duration > available_time:
             raise ValueError(
                 f"Task duration ({task_duration} minutes) exceeds available time "
-                f"({self.get_available_time(day)} minutes) in day {day}"
+                f"({available_time} minutes) in day {day}"
             )
 
+        def should_include(scheduled_task: ScheduledTask) -> bool:
+            if ignore_task is not None and scheduled_task.task.id == ignore_task.id:
+                return False
+            if ignore_scheduled_tasks and not is_task_fixed(scheduled_task.task):
+                return False
+            return True
+
         # Sort existing tasks by start time
-        sorted_tasks = sorted(self.days[day], key=lambda t: t.start)
+        sorted_tasks = sorted(
+            [scheduled_task for scheduled_task in self.days[day] if should_include(scheduled_task)],
+            key=lambda t: t.start,
+        )
 
         # Get the date for this day
         day_date = self.start_date + timedelta(days=day)
@@ -217,6 +258,36 @@ class TasksSchedule:
         self.add_scheduled_task(day, scheduled)
         return scheduled
 
+    # TODO ideally remove
+    def get_earliest_feasible_slot(
+        self,
+        task: "Task",
+        ignore_scheduled_tasks: bool = False,
+        ignore_task: "Task | None" = None,
+    ) -> datetime:
+        """
+        Get the earliest feasible slot for a task across all days.
+
+        Args:
+            task: Todoist Task object (must have duration set)
+            ignore_scheduled_tasks: Whether to ignore existing scheduled tasks
+            ignore_task: Task to ignore when checking occupied slots
+        """
+        for day in range(self.num_days):
+            try:
+                return self.get_first_available_slot_in_day(
+                    day,
+                    task,
+                    ignore_scheduled_tasks=ignore_scheduled_tasks,
+                    ignore_task=ignore_task,
+                )
+            except ValueError:
+                continue
+
+        raise ValueError(
+            f"Could not find feasible slot for task '{task.content}' in any day"
+        )
+
     def delete_task(self, task: "Task") -> ScheduledTask:
         """
         Delete a scheduled task by Todoist Task object.
@@ -265,7 +336,7 @@ class TasksSchedule:
             ValueError: If task has no duration or no day has enough available time
         """
 
-        slots = self.get_slot_per_every_day(
+        slots = self.get_slot_per_days(
             task, return_available_days=1, respect_deadline=respect_deadline
         )
 
@@ -352,11 +423,13 @@ class TasksSchedule:
             if include_fixed or not is_task_fixed(task.task)
         ]
 
-    def get_slot_per_every_day(
+    def get_slot_per_days(
         self,
         task: "Task",
         return_available_days: int | None = None,
         respect_deadline: bool = False,
+        ignore_scheduled_tasks: bool = False,
+        ignore_task: "Task | None" = None,
     ) -> List[tuple[int, datetime]]:
         """
         Get the first available slot for a task in every day.
@@ -385,7 +458,7 @@ class TasksSchedule:
         available_slots = []
         for day in range(schedule_before_day):
             try:
-                slot = self.get_first_available_slot_in_day(day, task)
+                slot = self.get_first_available_slot_in_day(day, task, ignore_scheduled_tasks=ignore_scheduled_tasks, ignore_task=ignore_task)
                 available_slots.append((day, slot))
                 if (
                     return_available_days is not None

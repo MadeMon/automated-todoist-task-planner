@@ -12,3 +12,10 @@ class ScheduledTask:
     start: "datetime"
     end: "datetime"
     task: "Task"
+
+    def __copy__(self):
+        return ScheduledTask(
+            start=self.start,
+            end=self.end,
+            task=self.task,
+        )

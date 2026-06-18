@@ -68,7 +68,7 @@ def regret_repair(state: State, rng: rnd.Generator, **kwargs) -> State:
         tasks_without_slots: list[Task] = []
 
         for task in previously_failed_tasks:
-            available_slots = schedule.get_slot_per_every_day(
+            available_slots = schedule.get_slot_per_days(
                 task, return_available_days=2, respect_deadline=True
             )
             if len(available_slots) == 0:
@@ -92,9 +92,18 @@ def regret_repair(state: State, rng: rnd.Generator, **kwargs) -> State:
                 end=second_best_slot
                 + timedelta(minutes=get_task_duration_minutes(task)),
             )
-            regret = compute_task_objective_contribution(
-                best_scheduled_task
-            ) - compute_task_objective_contribution(second_best_scheduled_task)
+            best_objective_contribution = compute_task_objective_contribution(
+                best_scheduled_task,
+                schedule,
+                ignore_other_scheduled_tasks=False,
+            )
+            second_best_objective_contribution = compute_task_objective_contribution(
+                second_best_scheduled_task,
+                schedule,
+                ignore_other_scheduled_tasks=False,
+            )
+            regret = best_objective_contribution - second_best_objective_contribution
+
             if regret > best_regret:
                 best_task = task
                 best_day = candidate_day

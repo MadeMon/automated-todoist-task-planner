@@ -1,4 +1,5 @@
 from __future__ import annotations
+import math
 import os
 from pathlib import Path
 import sys
@@ -10,14 +11,17 @@ from typing import Callable
 import mlflow
 from todoist_api_python.models import Task
 
-
-
-
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), ".."))
 
-from automated_todoist_task_planner.planners import BasePlanner, HeuristicPlanner
+from automated_todoist_task_planner.planners import BasePlanner, HeuristicPlanner, objective
+from automated_todoist_task_planner.planners.base_alns_planner import (
+    DEFAULT_DESTROY_FRACTION_MAX,
+    DEFAULT_DESTROY_FRACTION_MIN,
+    DEFAULT_STOP_NOT_IMPROVING_ITERATIONS,
+    _compute_destroy_fraction,
+)
 from automated_todoist_task_planner.schedule_plotter import plot_schedule_to_file
-from automated_todoist_task_planner.planners.alns_planners import get_random_dest_regret_to_repair, get_short_task_clusters_random_dest_regret_to_repair
+from automated_todoist_task_planner.planners.alns_planners import get_random_dest_regret_to_repair, get_random_duration_dest_regret_to_repair, get_short_task_clusters_random_dest_regret_to_repair, get_short_task_clusters_random_dest_settle_regret_to_repair, get_short_task_clusters_random_dur_dest_regret_to_repair
 from automated_todoist_task_planner.planners.base_planner import PlanningResult
 from automated_todoist_task_planner.scheduled_task import ScheduledTask
 
@@ -51,14 +55,35 @@ DEFAULT_SAMPLE_TASK_LISTS_PATHS: list[Path] = [
     # TASK_SEEDS_DIR / "seed_deadlines_priority_fixed_gaps.json",
     # TASK_SEEDS_DIR / "seed_deadlines_priority_fixed_varied_gaps.json"
     # TASK_SEEDS_DIR / "seed_deadlines_priority_fixed_gaps_fract.json"
-    TASK_SEEDS_DIR / "seed_deadlines_priority_fixed_gaps_fract_arbitrary.json"
+    # TASK_SEEDS_DIR / "seed_deadlines_priority_fixed_gaps_fract_arbitrary.json"
+    TASK_SEEDS_DIR / "kinda-good1.json"
+    # TASK_SEEDS_DIR / "generator-testing.json"
 ]
 
 DEFAULT_PLANNERS: list[Callable[[], BasePlanner]] = [
     # get_random_dest_regret_to_repair,
+    get_random_duration_dest_regret_to_repair,
     # get_short_task_clusters_random_dest_regret_to_repair,
-    lambda: HeuristicPlanner()
+    # get_short_task_clusters_random_dest_settle_regret_to_repair,
+    # get_short_task_clusters_random_dur_dest_regret_to_repair
+    # lambda: HeuristicPlanner()
 ]
+
+
+def test_destroy_fraction_schedule_defaults() -> None:
+    ramp_iterations = DEFAULT_STOP_NOT_IMPROVING_ITERATIONS
+    min_fraction = DEFAULT_DESTROY_FRACTION_MIN
+    max_fraction = DEFAULT_DESTROY_FRACTION_MAX
+
+    start_fraction = _compute_destroy_fraction(0)
+    mid_fraction = _compute_destroy_fraction(ramp_iterations // 2)
+    end_fraction = _compute_destroy_fraction(ramp_iterations)
+    beyond_fraction = _compute_destroy_fraction(ramp_iterations * 2)
+
+    assert math.isclose(start_fraction, min_fraction, rel_tol=1e-6, abs_tol=1e-6)
+    assert mid_fraction > start_fraction
+    assert math.isclose(end_fraction, max_fraction, rel_tol=1e-6, abs_tol=1e-6)
+    assert math.isclose(beyond_fraction, max_fraction, rel_tol=1e-6, abs_tol=1e-6)
 
 
 def test_planner(
@@ -107,8 +132,14 @@ def test_planner(
         assert_all_tasks_scheduled_or_failed(result)
         assert_no_overlapping_tasks(result.schedule)
         assert_task_properties_preserved(result, snapshot)
-        objective = compute_objective(result, planning_to_date)
-        assert isinstance(objective, float)
+        # objective = compute_objective(result, planning_to_date)
+        objective_val = objective(
+            schedule=result.schedule,
+            failed_to_schedule=result.failed_to_schedule,
+            planning_to_date=planning_to_date,
+        )
+
+        assert isinstance(objective_val, float)
         if result.search_statistics is not None:
             assert result.search_statistics.best_solution_iteration >= 0
     finally:
@@ -116,26 +147,35 @@ def test_planner(
 
 
 def run_test(planners: list[Callable[[], BasePlanner]], sample_task_lists_paths: list[Path]) -> None:
+    from config import LOG_TO_MLFLOW
+    print("MLFLOW logging enabled:", LOG_TO_MLFLOW)
+
     planning_to_date = PLANNING_FROM_DATE + timedelta(days=PLANNING_DAYS)
 
     for path in sample_task_lists_paths:
         sample_tasks = json_to_tasks(path, PLANNING_FROM_DATE)
-        mlflow.set_experiment(path.stem)
+        if LOG_TO_MLFLOW:
+            mlflow.set_experiment(path.stem)
+            mlflow.start_run()
+        for create_planner in planners:
+            planner = create_planner()
+            if LOG_TO_MLFLOW:
+                mlflow.start_run(run_name=f"{planner.name}_{datetime.now().isoformat()}", nested=True)
+            test_planner(
+                planner,
+                sample_tasks,
+                PLANNING_FROM_DATE,
+                planning_to_date,
+                PLANNING_START_TIME,
+                PLANNING_END_TIME,
+                PLANNING_DAYS,
+                seed_name=path.stem,
+            )
+            if LOG_TO_MLFLOW:
+                mlflow.end_run()
 
-        with mlflow.start_run():
-            for create_planner in planners:
-                planner = create_planner()
-                with mlflow.start_run(run_name=f"{planner.name}_{datetime.now().isoformat()}", nested=True):
-                    test_planner(
-                        planner,
-                        sample_tasks,
-                        PLANNING_FROM_DATE,
-                        planning_to_date,
-                        PLANNING_START_TIME,
-                        PLANNING_END_TIME,
-                        PLANNING_DAYS,
-                        seed_name=path.stem,
-                    )
+        if LOG_TO_MLFLOW:
+            mlflow.end_run()
 
 
 def _task_to_json(task: Task) -> dict[str, object]:
@@ -198,4 +238,5 @@ def save_schedule_to_json(
 
 
 if __name__ == "__main__":
+    test_destroy_fraction_schedule_defaults()
     run_test(DEFAULT_PLANNERS, DEFAULT_SAMPLE_TASK_LISTS_PATHS)

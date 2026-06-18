@@ -1,0 +1,1874 @@
+{
+  "project_name": "PA026 Playground",
+  "tasks": [
+    {
+      "content": "Fixed",
+      "priority": 1,
+      "due": {
+        "offset_days": 9,
+        "start_time": "16:20",
+        "end_time": "16:54"
+      },
+      "copies": 1,
+      "labels": [
+        "fixed"
+      ],
+      "gap_before_task": 28
+    },
+    {
+      "content": "Fixed",
+      "priority": 1,
+      "due": {
+        "offset_days": 1,
+        "start_time": "10:21",
+        "end_time": "11:21"
+      },
+      "copies": 1,
+      "labels": [
+        "fixed"
+      ],
+      "gap_before_task": 40
+    },
+    {
+      "content": "Fixed",
+      "priority": 1,
+      "due": {
+        "offset_days": 6,
+        "start_time": "15:17",
+        "end_time": "15:58"
+      },
+      "copies": 1,
+      "labels": [
+        "fixed"
+      ],
+      "gap_before_task": 161
+    },
+    {
+      "content": "Fixed",
+      "priority": 1,
+      "due": {
+        "offset_days": 10,
+        "start_time": "10:45",
+        "end_time": "11:34"
+      },
+      "copies": 1,
+      "labels": [
+        "fixed"
+      ],
+      "gap_before_task": 101
+    },
+    {
+      "content": "Fixed",
+      "priority": 1,
+      "due": {
+        "offset_days": 5,
+        "start_time": "13:35",
+        "end_time": "14:17"
+      },
+      "copies": 1,
+      "labels": [
+        "fixed"
+      ],
+      "gap_before_task": 125
+    },
+    {
+      "content": "Fixed",
+      "priority": 1,
+      "due": {
+        "offset_days": 2,
+        "start_time": "12:05",
+        "end_time": "12:53"
+      },
+      "copies": 1,
+      "labels": [
+        "fixed"
+      ],
+      "gap_before_task": 100
+    },
+    {
+      "content": "Fixed",
+      "priority": 1,
+      "due": {
+        "offset_days": 0,
+        "start_time": "11:39",
+        "end_time": "12:25"
+      },
+      "copies": 1,
+      "labels": [
+        "fixed"
+      ],
+      "gap_before_task": 154
+    },
+    {
+      "content": "Fixed",
+      "priority": 1,
+      "due": {
+        "offset_days": 7,
+        "start_time": "13:25",
+        "end_time": "13:38"
+      },
+      "copies": 1,
+      "labels": [
+        "fixed"
+      ],
+      "gap_before_task": 121
+    },
+    {
+      "content": "Fixed",
+      "priority": 1,
+      "due": {
+        "offset_days": 4,
+        "start_time": "12:19",
+        "end_time": "12:41"
+      },
+      "copies": 1,
+      "labels": [
+        "fixed"
+      ],
+      "gap_before_task": 84
+    },
+    {
+      "content": "Fixed",
+      "priority": 1,
+      "due": {
+        "offset_days": 11,
+        "start_time": "15:36",
+        "end_time": "15:50"
+      },
+      "copies": 1,
+      "labels": [
+        "fixed"
+      ],
+      "gap_before_task": 52
+    },
+    {
+      "content": "Fixed",
+      "priority": 1,
+      "due": {
+        "offset_days": 12,
+        "start_time": "15:04",
+        "end_time": "15:27"
+      },
+      "copies": 1,
+      "labels": [
+        "fixed"
+      ],
+      "gap_before_task": 129
+    },
+    {
+      "content": "Fixed",
+      "priority": 1,
+      "due": {
+        "offset_days": 8,
+        "start_time": "12:03",
+        "end_time": "12:55"
+      },
+      "copies": 1,
+      "labels": [
+        "fixed"
+      ],
+      "gap_before_task": 152
+    },
+    {
+      "content": "Fixed",
+      "priority": 1,
+      "due": {
+        "offset_days": 13,
+        "start_time": "09:55",
+        "end_time": "10:06"
+      },
+      "copies": 1,
+      "labels": [
+        "fixed"
+      ],
+      "gap_before_task": 14
+    },
+    {
+      "content": "Fixed",
+      "priority": 1,
+      "due": {
+        "offset_days": 3,
+        "start_time": "12:49",
+        "end_time": "13:14"
+      },
+      "copies": 1,
+      "labels": [
+        "fixed"
+      ],
+      "gap_before_task": 176
+    },
+    {
+      "content": "Fixed",
+      "priority": 1,
+      "due": {
+        "offset_days": 13,
+        "start_time": "15:18",
+        "end_time": "16:16"
+      },
+      "copies": 1,
+      "labels": [
+        "fixed"
+      ],
+      "gap_before_task": 173
+    },
+    {
+      "content": "Fixed",
+      "priority": 1,
+      "due": {
+        "offset_days": 7,
+        "start_time": "11:36",
+        "end_time": "12:36"
+      },
+      "copies": 1,
+      "labels": [
+        "fixed"
+      ],
+      "gap_before_task": 56
+    },
+    {
+      "content": "Fixed",
+      "priority": 1,
+      "due": {
+        "offset_days": 3,
+        "start_time": "14:23",
+        "end_time": "14:31"
+      },
+      "copies": 1,
+      "labels": [
+        "fixed"
+      ],
+      "gap_before_task": 26
+    },
+    {
+      "content": "Fixed",
+      "priority": 1,
+      "due": {
+        "offset_days": 4,
+        "start_time": "09:07",
+        "end_time": "09:51"
+      },
+      "copies": 1,
+      "labels": [
+        "fixed"
+      ],
+      "gap_before_task": 139
+    },
+    {
+      "content": "Fixed",
+      "priority": 1,
+      "due": {
+        "offset_days": 8,
+        "start_time": "16:41",
+        "end_time": "16:47"
+      },
+      "copies": 1,
+      "labels": [
+        "fixed"
+      ],
+      "gap_before_task": 15
+    },
+    {
+      "content": "Fixed",
+      "priority": 1,
+      "due": {
+        "offset_days": 0,
+        "start_time": "09:05",
+        "end_time": "09:38"
+      },
+      "copies": 1,
+      "labels": [
+        "fixed"
+      ],
+      "gap_before_task": 162
+    },
+    {
+      "content": "Fixed",
+      "priority": 1,
+      "due": {
+        "offset_days": 1,
+        "start_time": "09:33",
+        "end_time": "09:40"
+      },
+      "copies": 1,
+      "labels": [
+        "fixed"
+      ],
+      "gap_before_task": 44
+    },
+    {
+      "content": "Fixed",
+      "priority": 1,
+      "due": {
+        "offset_days": 6,
+        "start_time": "16:44",
+        "end_time": "16:59"
+      },
+      "copies": 1,
+      "labels": [
+        "fixed"
+      ],
+      "gap_before_task": 144
+    },
+    {
+      "content": "Fixed",
+      "priority": 1,
+      "due": {
+        "offset_days": 2,
+        "start_time": "16:25",
+        "end_time": "16:45"
+      },
+      "copies": 1,
+      "labels": [
+        "fixed"
+      ],
+      "gap_before_task": 16
+    },
+    {
+      "content": "Fixed",
+      "priority": 1,
+      "due": {
+        "offset_days": 12,
+        "start_time": "13:13",
+        "end_time": "13:54"
+      },
+      "copies": 1,
+      "labels": [
+        "fixed"
+      ],
+      "gap_before_task": 77
+    },
+    {
+      "content": "Fixed",
+      "priority": 1,
+      "due": {
+        "offset_days": 11,
+        "start_time": "16:28",
+        "end_time": "16:48"
+      },
+      "copies": 1,
+      "labels": [
+        "fixed"
+      ],
+      "gap_before_task": 105
+    },
+    {
+      "content": "Fixed",
+      "priority": 1,
+      "due": {
+        "offset_days": 10,
+        "start_time": "16:03",
+        "end_time": "16:10"
+      },
+      "copies": 1,
+      "labels": [
+        "fixed"
+      ],
+      "gap_before_task": 26
+    },
+    {
+      "content": "Fixed",
+      "priority": 1,
+      "due": {
+        "offset_days": 5,
+        "start_time": "15:15",
+        "end_time": "16:13"
+      },
+      "copies": 1,
+      "labels": [
+        "fixed"
+      ],
+      "gap_before_task": 136
+    },
+    {
+      "content": "Fixed",
+      "priority": 1,
+      "due": {
+        "offset_days": 9,
+        "start_time": "12:04",
+        "end_time": "12:36"
+      },
+      "copies": 1,
+      "labels": [
+        "fixed"
+      ],
+      "gap_before_task": 77
+    },
+    {
+      "content": "Fixed",
+      "priority": 1,
+      "due": {
+        "offset_days": 2,
+        "start_time": "09:49",
+        "end_time": "10:36"
+      },
+      "copies": 1,
+      "labels": [
+        "fixed"
+      ],
+      "gap_before_task": 51
+    },
+    {
+      "content": "Fixed",
+      "priority": 1,
+      "due": {
+        "offset_days": 0,
+        "start_time": "12:56",
+        "end_time": "13:36"
+      },
+      "copies": 1,
+      "labels": [
+        "fixed"
+      ],
+      "gap_before_task": 30
+    },
+    {
+      "content": "Fixed",
+      "priority": 1,
+      "due": {
+        "offset_days": 3,
+        "start_time": "09:35",
+        "end_time": "10:25"
+      },
+      "copies": 1,
+      "labels": [
+        "fixed"
+      ],
+      "gap_before_task": 39
+    },
+    {
+      "content": "Fixed",
+      "priority": 1,
+      "due": {
+        "offset_days": 10,
+        "start_time": "14:14",
+        "end_time": "14:21"
+      },
+      "copies": 1,
+      "labels": [
+        "fixed"
+      ],
+      "gap_before_task": 127
+    },
+    {
+      "content": "Fixed",
+      "priority": 1,
+      "due": {
+        "offset_days": 5,
+        "start_time": "12:29",
+        "end_time": "12:46"
+      },
+      "copies": 1,
+      "labels": [
+        "fixed"
+      ],
+      "gap_before_task": 26
+    },
+    {
+      "content": "Fixed",
+      "priority": 1,
+      "due": {
+        "offset_days": 9,
+        "start_time": "09:18",
+        "end_time": "09:34"
+      },
+      "copies": 1,
+      "labels": [
+        "fixed"
+      ],
+      "gap_before_task": 18
+    },
+    {
+      "content": "Fixed",
+      "priority": 1,
+      "due": {
+        "offset_days": 7,
+        "start_time": "14:37",
+        "end_time": "15:26"
+      },
+      "copies": 1,
+      "labels": [
+        "fixed"
+      ],
+      "gap_before_task": 25
+    },
+    {
+      "content": "20min | D 4d",
+      "priority": 1,
+      "due": {
+        "offset_days": 0,
+        "start_time": "10:00",
+        "end_time": "10:20"
+      },
+      "copies": 1,
+      "deadline": {
+        "offset_days": 4
+      },
+      "gap_before_task": 55
+    },
+    {
+      "content": "113min | D 5d",
+      "priority": 3,
+      "due": {
+        "offset_days": 0,
+        "start_time": "10:00",
+        "end_time": "11:53"
+      },
+      "copies": 1,
+      "deadline": {
+        "offset_days": 5
+      },
+      "gap_before_task": 113
+    },
+    {
+      "content": "40min | D 1d",
+      "priority": 4,
+      "due": {
+        "offset_days": 0,
+        "start_time": "10:00",
+        "end_time": "10:40"
+      },
+      "copies": 1,
+      "deadline": {
+        "offset_days": 1
+      },
+      "gap_before_task": 78
+    },
+    {
+      "content": "108min | D 14d",
+      "priority": 1,
+      "due": {
+        "offset_days": 0,
+        "start_time": "10:00",
+        "end_time": "11:48"
+      },
+      "copies": 1,
+      "deadline": {
+        "offset_days": 14
+      },
+      "gap_before_task": 47
+    },
+    {
+      "content": "46min | D 2d",
+      "priority": 3,
+      "due": {
+        "offset_days": 0,
+        "start_time": "10:00",
+        "end_time": "10:46"
+      },
+      "copies": 1,
+      "deadline": {
+        "offset_days": 2
+      },
+      "gap_before_task": 14
+    },
+    {
+      "content": "32min | D 0d",
+      "priority": 2,
+      "due": {
+        "offset_days": 0,
+        "start_time": "10:00",
+        "end_time": "10:32"
+      },
+      "copies": 1,
+      "deadline": {
+        "offset_days": 0
+      },
+      "gap_before_task": 53
+    },
+    {
+      "content": "45min | D 6d",
+      "priority": 1,
+      "due": {
+        "offset_days": 0,
+        "start_time": "10:00",
+        "end_time": "10:45"
+      },
+      "copies": 1,
+      "deadline": {
+        "offset_days": 6
+      },
+      "gap_before_task": 108
+    },
+    {
+      "content": "130 min",
+      "priority": 1,
+      "due": {
+        "offset_days": 0,
+        "start_time": "10:00",
+        "end_time": "12:10"
+      },
+      "copies": 1,
+      "gap_before_task": 13
+    },
+    {
+      "content": "59min | D 12d",
+      "priority": 1,
+      "due": {
+        "offset_days": 0,
+        "start_time": "10:00",
+        "end_time": "10:59"
+      },
+      "copies": 1,
+      "deadline": {
+        "offset_days": 12
+      },
+      "gap_before_task": 71
+    },
+    {
+      "content": "175min | D 8d",
+      "priority": 3,
+      "due": {
+        "offset_days": 0,
+        "start_time": "10:00",
+        "end_time": "12:55"
+      },
+      "copies": 1,
+      "deadline": {
+        "offset_days": 8
+      },
+      "gap_before_task": 110
+    },
+    {
+      "content": "14min | D 2d",
+      "priority": 2,
+      "due": {
+        "offset_days": 0,
+        "start_time": "10:00",
+        "end_time": "10:14"
+      },
+      "copies": 1,
+      "deadline": {
+        "offset_days": 2
+      },
+      "gap_before_task": 99
+    },
+    {
+      "content": "11min | D 2d",
+      "priority": 1,
+      "due": {
+        "offset_days": 0,
+        "start_time": "10:00",
+        "end_time": "10:11"
+      },
+      "copies": 1,
+      "deadline": {
+        "offset_days": 2
+      },
+      "gap_before_task": 27
+    },
+    {
+      "content": "31min | D 5d",
+      "priority": 4,
+      "due": {
+        "offset_days": 0,
+        "start_time": "10:00",
+        "end_time": "10:31"
+      },
+      "copies": 1,
+      "deadline": {
+        "offset_days": 5
+      },
+      "gap_before_task": 130
+    },
+    {
+      "content": "44min | D 13d",
+      "priority": 4,
+      "due": {
+        "offset_days": 0,
+        "start_time": "10:00",
+        "end_time": "10:44"
+      },
+      "copies": 1,
+      "deadline": {
+        "offset_days": 13
+      },
+      "gap_before_task": 61
+    },
+    {
+      "content": "102min | D 3d",
+      "priority": 2,
+      "due": {
+        "offset_days": 0,
+        "start_time": "10:00",
+        "end_time": "11:42"
+      },
+      "copies": 1,
+      "deadline": {
+        "offset_days": 3
+      },
+      "gap_before_task": 59
+    },
+    {
+      "content": "25min | D 3d",
+      "priority": 4,
+      "due": {
+        "offset_days": 0,
+        "start_time": "10:00",
+        "end_time": "10:25"
+      },
+      "copies": 1,
+      "deadline": {
+        "offset_days": 3
+      },
+      "gap_before_task": 33
+    },
+    {
+      "content": "47min | D 11d",
+      "priority": 3,
+      "due": {
+        "offset_days": 0,
+        "start_time": "10:00",
+        "end_time": "10:47"
+      },
+      "copies": 1,
+      "deadline": {
+        "offset_days": 11
+      },
+      "gap_before_task": 161
+    },
+    {
+      "content": "5min | D 5d",
+      "priority": 4,
+      "due": {
+        "offset_days": 0,
+        "start_time": "10:00",
+        "end_time": "10:05"
+      },
+      "copies": 1,
+      "deadline": {
+        "offset_days": 5
+      },
+      "gap_before_task": 165
+    },
+    {
+      "content": "8min | D 11d",
+      "priority": 2,
+      "due": {
+        "offset_days": 0,
+        "start_time": "10:00",
+        "end_time": "10:08"
+      },
+      "copies": 1,
+      "deadline": {
+        "offset_days": 11
+      },
+      "gap_before_task": 31
+    },
+    {
+      "content": "98min | D 9d",
+      "priority": 1,
+      "due": {
+        "offset_days": 0,
+        "start_time": "10:00",
+        "end_time": "11:38"
+      },
+      "copies": 1,
+      "deadline": {
+        "offset_days": 9
+      },
+      "gap_before_task": 23
+    },
+    {
+      "content": "53min | D 13d",
+      "priority": 2,
+      "due": {
+        "offset_days": 0,
+        "start_time": "10:00",
+        "end_time": "10:53"
+      },
+      "copies": 1,
+      "deadline": {
+        "offset_days": 13
+      },
+      "gap_before_task": 142
+    },
+    {
+      "content": "9min | D 9d",
+      "priority": 3,
+      "due": {
+        "offset_days": 0,
+        "start_time": "10:00",
+        "end_time": "10:09"
+      },
+      "copies": 1,
+      "deadline": {
+        "offset_days": 9
+      },
+      "gap_before_task": 80
+    },
+    {
+      "content": "12min | D 13d",
+      "priority": 4,
+      "due": {
+        "offset_days": 0,
+        "start_time": "10:00",
+        "end_time": "10:12"
+      },
+      "copies": 1,
+      "deadline": {
+        "offset_days": 13
+      },
+      "gap_before_task": 136
+    },
+    {
+      "content": "38min | D 1d",
+      "priority": 1,
+      "due": {
+        "offset_days": 0,
+        "start_time": "10:00",
+        "end_time": "10:38"
+      },
+      "copies": 1,
+      "deadline": {
+        "offset_days": 1
+      },
+      "gap_before_task": 175
+    },
+    {
+      "content": "13min | D 3d",
+      "priority": 1,
+      "due": {
+        "offset_days": 0,
+        "start_time": "10:00",
+        "end_time": "10:13"
+      },
+      "copies": 1,
+      "deadline": {
+        "offset_days": 3
+      },
+      "gap_before_task": 47
+    },
+    {
+      "content": "10min | D 10d",
+      "priority": 4,
+      "due": {
+        "offset_days": 0,
+        "start_time": "10:00",
+        "end_time": "10:10"
+      },
+      "copies": 1,
+      "deadline": {
+        "offset_days": 10
+      },
+      "gap_before_task": 177
+    },
+    {
+      "content": "70min | D 4d",
+      "priority": 2,
+      "due": {
+        "offset_days": 0,
+        "start_time": "10:00",
+        "end_time": "11:10"
+      },
+      "copies": 1,
+      "deadline": {
+        "offset_days": 4
+      },
+      "gap_before_task": 170
+    },
+    {
+      "content": "92min | D 3d",
+      "priority": 4,
+      "due": {
+        "offset_days": 0,
+        "start_time": "10:00",
+        "end_time": "11:32"
+      },
+      "copies": 1,
+      "deadline": {
+        "offset_days": 3
+      },
+      "gap_before_task": 29
+    },
+    {
+      "content": "62min | D 6d",
+      "priority": 3,
+      "due": {
+        "offset_days": 0,
+        "start_time": "10:00",
+        "end_time": "11:02"
+      },
+      "copies": 1,
+      "deadline": {
+        "offset_days": 6
+      },
+      "gap_before_task": 171
+    },
+    {
+      "content": "85min | D 13d",
+      "priority": 3,
+      "due": {
+        "offset_days": 0,
+        "start_time": "10:00",
+        "end_time": "11:25"
+      },
+      "copies": 1,
+      "deadline": {
+        "offset_days": 13
+      },
+      "gap_before_task": 119
+    },
+    {
+      "content": "73 min",
+      "priority": 2,
+      "due": {
+        "offset_days": 0,
+        "start_time": "10:00",
+        "end_time": "11:13"
+      },
+      "copies": 1,
+      "gap_before_task": 100
+    },
+    {
+      "content": "102min | D 11d",
+      "priority": 1,
+      "due": {
+        "offset_days": 0,
+        "start_time": "10:00",
+        "end_time": "11:42"
+      },
+      "copies": 1,
+      "deadline": {
+        "offset_days": 11
+      },
+      "gap_before_task": 82
+    },
+    {
+      "content": "49min | D 1d",
+      "priority": 4,
+      "due": {
+        "offset_days": 0,
+        "start_time": "10:00",
+        "end_time": "10:49"
+      },
+      "copies": 1,
+      "deadline": {
+        "offset_days": 1
+      },
+      "gap_before_task": 23
+    },
+    {
+      "content": "33min | D 9d",
+      "priority": 1,
+      "due": {
+        "offset_days": 0,
+        "start_time": "10:00",
+        "end_time": "10:33"
+      },
+      "copies": 1,
+      "deadline": {
+        "offset_days": 9
+      },
+      "gap_before_task": 70
+    },
+    {
+      "content": "38min | D 12d",
+      "priority": 3,
+      "due": {
+        "offset_days": 0,
+        "start_time": "10:00",
+        "end_time": "10:38"
+      },
+      "copies": 1,
+      "deadline": {
+        "offset_days": 12
+      },
+      "gap_before_task": 161
+    },
+    {
+      "content": "136min | D 14d",
+      "priority": 1,
+      "due": {
+        "offset_days": 0,
+        "start_time": "10:00",
+        "end_time": "12:16"
+      },
+      "copies": 1,
+      "deadline": {
+        "offset_days": 14
+      },
+      "gap_before_task": 39
+    },
+    {
+      "content": "33min | D 6d",
+      "priority": 4,
+      "due": {
+        "offset_days": 0,
+        "start_time": "10:00",
+        "end_time": "10:33"
+      },
+      "copies": 1,
+      "deadline": {
+        "offset_days": 6
+      },
+      "gap_before_task": 109
+    },
+    {
+      "content": "24min | D 8d",
+      "priority": 2,
+      "due": {
+        "offset_days": 0,
+        "start_time": "10:00",
+        "end_time": "10:24"
+      },
+      "copies": 1,
+      "deadline": {
+        "offset_days": 8
+      },
+      "gap_before_task": 84
+    },
+    {
+      "content": "107min | D 11d",
+      "priority": 4,
+      "due": {
+        "offset_days": 0,
+        "start_time": "10:00",
+        "end_time": "11:47"
+      },
+      "copies": 1,
+      "deadline": {
+        "offset_days": 11
+      },
+      "gap_before_task": 43
+    },
+    {
+      "content": "18 min",
+      "priority": 4,
+      "due": {
+        "offset_days": 0,
+        "start_time": "10:00",
+        "end_time": "10:18"
+      },
+      "copies": 1,
+      "gap_before_task": 91
+    },
+    {
+      "content": "50min | D 8d",
+      "priority": 4,
+      "due": {
+        "offset_days": 0,
+        "start_time": "10:00",
+        "end_time": "10:50"
+      },
+      "copies": 1,
+      "deadline": {
+        "offset_days": 8
+      },
+      "gap_before_task": 108
+    },
+    {
+      "content": "15min | D 9d",
+      "priority": 2,
+      "due": {
+        "offset_days": 0,
+        "start_time": "10:00",
+        "end_time": "10:15"
+      },
+      "copies": 1,
+      "deadline": {
+        "offset_days": 9
+      },
+      "gap_before_task": 180
+    },
+    {
+      "content": "52min | D 9d",
+      "priority": 1,
+      "due": {
+        "offset_days": 0,
+        "start_time": "10:00",
+        "end_time": "10:52"
+      },
+      "copies": 1,
+      "deadline": {
+        "offset_days": 9
+      },
+      "gap_before_task": 137
+    },
+    {
+      "content": "26 min",
+      "priority": 3,
+      "due": {
+        "offset_days": 0,
+        "start_time": "10:00",
+        "end_time": "10:26"
+      },
+      "copies": 1,
+      "gap_before_task": 20
+    },
+    {
+      "content": "26min | D 13d",
+      "priority": 4,
+      "due": {
+        "offset_days": 0,
+        "start_time": "10:00",
+        "end_time": "10:26"
+      },
+      "copies": 1,
+      "deadline": {
+        "offset_days": 13
+      },
+      "gap_before_task": 162
+    },
+    {
+      "content": "91min | D 9d",
+      "priority": 4,
+      "due": {
+        "offset_days": 0,
+        "start_time": "10:00",
+        "end_time": "11:31"
+      },
+      "copies": 1,
+      "deadline": {
+        "offset_days": 9
+      },
+      "gap_before_task": 111
+    },
+    {
+      "content": "8min | D 3d",
+      "priority": 2,
+      "due": {
+        "offset_days": 0,
+        "start_time": "10:00",
+        "end_time": "10:08"
+      },
+      "copies": 1,
+      "deadline": {
+        "offset_days": 3
+      },
+      "gap_before_task": 10
+    },
+    {
+      "content": "45min | D 14d",
+      "priority": 4,
+      "due": {
+        "offset_days": 0,
+        "start_time": "10:00",
+        "end_time": "10:45"
+      },
+      "copies": 1,
+      "deadline": {
+        "offset_days": 14
+      },
+      "gap_before_task": 18
+    },
+    {
+      "content": "71min | D 12d",
+      "priority": 3,
+      "due": {
+        "offset_days": 0,
+        "start_time": "10:00",
+        "end_time": "11:11"
+      },
+      "copies": 1,
+      "deadline": {
+        "offset_days": 12
+      },
+      "gap_before_task": 97
+    },
+    {
+      "content": "134min | D 8d",
+      "priority": 1,
+      "due": {
+        "offset_days": 0,
+        "start_time": "10:00",
+        "end_time": "12:14"
+      },
+      "copies": 1,
+      "deadline": {
+        "offset_days": 8
+      },
+      "gap_before_task": 19
+    },
+    {
+      "content": "67min | D 6d",
+      "priority": 2,
+      "due": {
+        "offset_days": 0,
+        "start_time": "10:00",
+        "end_time": "11:07"
+      },
+      "copies": 1,
+      "deadline": {
+        "offset_days": 6
+      },
+      "gap_before_task": 60
+    },
+    {
+      "content": "69min | D 0d",
+      "priority": 2,
+      "due": {
+        "offset_days": 0,
+        "start_time": "10:00",
+        "end_time": "11:09"
+      },
+      "copies": 1,
+      "deadline": {
+        "offset_days": 0
+      },
+      "gap_before_task": 91
+    },
+    {
+      "content": "115min | D 13d",
+      "priority": 2,
+      "due": {
+        "offset_days": 0,
+        "start_time": "10:00",
+        "end_time": "11:55"
+      },
+      "copies": 1,
+      "deadline": {
+        "offset_days": 13
+      },
+      "gap_before_task": 72
+    },
+    {
+      "content": "139min | D 7d",
+      "priority": 2,
+      "due": {
+        "offset_days": 0,
+        "start_time": "10:00",
+        "end_time": "12:19"
+      },
+      "copies": 1,
+      "deadline": {
+        "offset_days": 7
+      },
+      "gap_before_task": 54
+    },
+    {
+      "content": "8min | D 5d",
+      "priority": 3,
+      "due": {
+        "offset_days": 0,
+        "start_time": "10:00",
+        "end_time": "10:08"
+      },
+      "copies": 1,
+      "deadline": {
+        "offset_days": 5
+      },
+      "gap_before_task": 78
+    },
+    {
+      "content": "10min | D 0d",
+      "priority": 2,
+      "due": {
+        "offset_days": 0,
+        "start_time": "10:00",
+        "end_time": "10:10"
+      },
+      "copies": 1,
+      "deadline": {
+        "offset_days": 0
+      },
+      "gap_before_task": 28
+    },
+    {
+      "content": "16min | D 9d",
+      "priority": 2,
+      "due": {
+        "offset_days": 0,
+        "start_time": "10:00",
+        "end_time": "10:16"
+      },
+      "copies": 1,
+      "deadline": {
+        "offset_days": 9
+      },
+      "gap_before_task": 60
+    },
+    {
+      "content": "83min | D 5d",
+      "priority": 4,
+      "due": {
+        "offset_days": 0,
+        "start_time": "10:00",
+        "end_time": "11:23"
+      },
+      "copies": 1,
+      "deadline": {
+        "offset_days": 5
+      },
+      "gap_before_task": 57
+    },
+    {
+      "content": "31min | D 12d",
+      "priority": 3,
+      "due": {
+        "offset_days": 0,
+        "start_time": "10:00",
+        "end_time": "10:31"
+      },
+      "copies": 1,
+      "deadline": {
+        "offset_days": 12
+      },
+      "gap_before_task": 109
+    },
+    {
+      "content": "11min | D 2d",
+      "priority": 4,
+      "due": {
+        "offset_days": 0,
+        "start_time": "10:00",
+        "end_time": "10:11"
+      },
+      "copies": 1,
+      "deadline": {
+        "offset_days": 2
+      },
+      "gap_before_task": 139
+    },
+    {
+      "content": "32min | D 11d",
+      "priority": 4,
+      "due": {
+        "offset_days": 0,
+        "start_time": "10:00",
+        "end_time": "10:32"
+      },
+      "copies": 1,
+      "deadline": {
+        "offset_days": 11
+      },
+      "gap_before_task": 13
+    },
+    {
+      "content": "162min | D 4d",
+      "priority": 1,
+      "due": {
+        "offset_days": 0,
+        "start_time": "10:00",
+        "end_time": "12:42"
+      },
+      "copies": 1,
+      "deadline": {
+        "offset_days": 4
+      },
+      "gap_before_task": 97
+    },
+    {
+      "content": "86min | D 10d",
+      "priority": 3,
+      "due": {
+        "offset_days": 0,
+        "start_time": "10:00",
+        "end_time": "11:26"
+      },
+      "copies": 1,
+      "deadline": {
+        "offset_days": 10
+      },
+      "gap_before_task": 98
+    },
+    {
+      "content": "127min | D 3d",
+      "priority": 2,
+      "due": {
+        "offset_days": 0,
+        "start_time": "10:00",
+        "end_time": "12:07"
+      },
+      "copies": 1,
+      "deadline": {
+        "offset_days": 3
+      },
+      "gap_before_task": 150
+    },
+    {
+      "content": "52min | D 7d",
+      "priority": 1,
+      "due": {
+        "offset_days": 0,
+        "start_time": "10:00",
+        "end_time": "10:52"
+      },
+      "copies": 1,
+      "deadline": {
+        "offset_days": 7
+      },
+      "gap_before_task": 153
+    },
+    {
+      "content": "152min | D 6d",
+      "priority": 3,
+      "due": {
+        "offset_days": 0,
+        "start_time": "10:00",
+        "end_time": "12:32"
+      },
+      "copies": 1,
+      "deadline": {
+        "offset_days": 6
+      },
+      "gap_before_task": 92
+    },
+    {
+      "content": "100min | D 9d",
+      "priority": 4,
+      "due": {
+        "offset_days": 0,
+        "start_time": "10:00",
+        "end_time": "11:40"
+      },
+      "copies": 1,
+      "deadline": {
+        "offset_days": 9
+      },
+      "gap_before_task": 96
+    },
+    {
+      "content": "108min | D 0d",
+      "priority": 3,
+      "due": {
+        "offset_days": 0,
+        "start_time": "10:00",
+        "end_time": "11:48"
+      },
+      "copies": 1,
+      "deadline": {
+        "offset_days": 0
+      },
+      "gap_before_task": 49
+    },
+    {
+      "content": "120min | D 10d",
+      "priority": 3,
+      "due": {
+        "offset_days": 0,
+        "start_time": "10:00",
+        "end_time": "12:00"
+      },
+      "copies": 1,
+      "deadline": {
+        "offset_days": 10
+      },
+      "gap_before_task": 118
+    },
+    {
+      "content": "48min | D 12d",
+      "priority": 2,
+      "due": {
+        "offset_days": 0,
+        "start_time": "10:00",
+        "end_time": "10:48"
+      },
+      "copies": 1,
+      "deadline": {
+        "offset_days": 12
+      },
+      "gap_before_task": 40
+    },
+    {
+      "content": "22min | D 7d",
+      "priority": 2,
+      "due": {
+        "offset_days": 0,
+        "start_time": "10:00",
+        "end_time": "10:22"
+      },
+      "copies": 1,
+      "deadline": {
+        "offset_days": 7
+      },
+      "gap_before_task": 31
+    },
+    {
+      "content": "48min | D 0d",
+      "priority": 3,
+      "due": {
+        "offset_days": 0,
+        "start_time": "10:00",
+        "end_time": "10:48"
+      },
+      "copies": 1,
+      "deadline": {
+        "offset_days": 0
+      },
+      "gap_before_task": 86
+    },
+    {
+      "content": "6min | D 2d",
+      "priority": 2,
+      "due": {
+        "offset_days": 0,
+        "start_time": "10:00",
+        "end_time": "10:06"
+      },
+      "copies": 1,
+      "deadline": {
+        "offset_days": 2
+      },
+      "gap_before_task": 109
+    },
+    {
+      "content": "39min | D 14d",
+      "priority": 1,
+      "due": {
+        "offset_days": 0,
+        "start_time": "10:00",
+        "end_time": "10:39"
+      },
+      "copies": 1,
+      "deadline": {
+        "offset_days": 14
+      },
+      "gap_before_task": 171
+    },
+    {
+      "content": "128min | D 6d",
+      "priority": 3,
+      "due": {
+        "offset_days": 0,
+        "start_time": "10:00",
+        "end_time": "12:08"
+      },
+      "copies": 1,
+      "deadline": {
+        "offset_days": 6
+      },
+      "gap_before_task": 106
+    },
+    {
+      "content": "28min | D 12d",
+      "priority": 3,
+      "due": {
+        "offset_days": 0,
+        "start_time": "10:00",
+        "end_time": "10:28"
+      },
+      "copies": 1,
+      "deadline": {
+        "offset_days": 12
+      },
+      "gap_before_task": 130
+    },
+    {
+      "content": "118 min",
+      "priority": 1,
+      "due": {
+        "offset_days": 0,
+        "start_time": "10:00",
+        "end_time": "11:58"
+      },
+      "copies": 1,
+      "gap_before_task": 32
+    },
+    {
+      "content": "15min | D 5d",
+      "priority": 2,
+      "due": {
+        "offset_days": 0,
+        "start_time": "10:00",
+        "end_time": "10:15"
+      },
+      "copies": 1,
+      "deadline": {
+        "offset_days": 5
+      },
+      "gap_before_task": 45
+    },
+    {
+      "content": "13min | D 9d",
+      "priority": 3,
+      "due": {
+        "offset_days": 0,
+        "start_time": "10:00",
+        "end_time": "10:13"
+      },
+      "copies": 1,
+      "deadline": {
+        "offset_days": 9
+      },
+      "gap_before_task": 50
+    },
+    {
+      "content": "64min | D 4d",
+      "priority": 1,
+      "due": {
+        "offset_days": 0,
+        "start_time": "10:00",
+        "end_time": "11:04"
+      },
+      "copies": 1,
+      "deadline": {
+        "offset_days": 4
+      },
+      "gap_before_task": 77
+    },
+    {
+      "content": "122min | D 1d",
+      "priority": 3,
+      "due": {
+        "offset_days": 0,
+        "start_time": "10:00",
+        "end_time": "12:02"
+      },
+      "copies": 1,
+      "deadline": {
+        "offset_days": 1
+      },
+      "gap_before_task": 19
+    },
+    {
+      "content": "53min | D 6d",
+      "priority": 1,
+      "due": {
+        "offset_days": 0,
+        "start_time": "10:00",
+        "end_time": "10:53"
+      },
+      "copies": 1,
+      "deadline": {
+        "offset_days": 6
+      },
+      "gap_before_task": 59
+    },
+    {
+      "content": "40min | D 2d",
+      "priority": 3,
+      "due": {
+        "offset_days": 0,
+        "start_time": "10:00",
+        "end_time": "10:40"
+      },
+      "copies": 1,
+      "deadline": {
+        "offset_days": 2
+      },
+      "gap_before_task": 32
+    },
+    {
+      "content": "9min | D 2d",
+      "priority": 4,
+      "due": {
+        "offset_days": 0,
+        "start_time": "10:00",
+        "end_time": "10:09"
+      },
+      "copies": 1,
+      "deadline": {
+        "offset_days": 2
+      },
+      "gap_before_task": 129
+    },
+    {
+      "content": "56min | D 8d",
+      "priority": 3,
+      "due": {
+        "offset_days": 0,
+        "start_time": "10:00",
+        "end_time": "10:56"
+      },
+      "copies": 1,
+      "deadline": {
+        "offset_days": 8
+      },
+      "gap_before_task": 30
+    },
+    {
+      "content": "6min | D 6d",
+      "priority": 1,
+      "due": {
+        "offset_days": 0,
+        "start_time": "10:00",
+        "end_time": "10:06"
+      },
+      "copies": 1,
+      "deadline": {
+        "offset_days": 6
+      },
+      "gap_before_task": 22
+    },
+    {
+      "content": "30min | D 1d",
+      "priority": 3,
+      "due": {
+        "offset_days": 0,
+        "start_time": "10:00",
+        "end_time": "10:30"
+      },
+      "copies": 1,
+      "deadline": {
+        "offset_days": 1
+      },
+      "gap_before_task": 141
+    },
+    {
+      "content": "21min | D 13d",
+      "priority": 4,
+      "due": {
+        "offset_days": 0,
+        "start_time": "10:00",
+        "end_time": "10:21"
+      },
+      "copies": 1,
+      "deadline": {
+        "offset_days": 13
+      },
+      "gap_before_task": 105
+    },
+    {
+      "content": "165min | D 11d",
+      "priority": 2,
+      "due": {
+        "offset_days": 0,
+        "start_time": "10:00",
+        "end_time": "12:45"
+      },
+      "copies": 1,
+      "deadline": {
+        "offset_days": 11
+      },
+      "gap_before_task": 11
+    },
+    {
+      "content": "22min | D 14d",
+      "priority": 3,
+      "due": {
+        "offset_days": 0,
+        "start_time": "10:00",
+        "end_time": "10:22"
+      },
+      "copies": 1,
+      "deadline": {
+        "offset_days": 14
+      },
+      "gap_before_task": 150
+    },
+    {
+      "content": "174 min",
+      "priority": 3,
+      "due": {
+        "offset_days": 0,
+        "start_time": "10:00",
+        "end_time": "12:54"
+      },
+      "copies": 1,
+      "gap_before_task": 93
+    },
+    {
+      "content": "38min | D 10d",
+      "priority": 2,
+      "due": {
+        "offset_days": 0,
+        "start_time": "10:00",
+        "end_time": "10:38"
+      },
+      "copies": 1,
+      "deadline": {
+        "offset_days": 10
+      },
+      "gap_before_task": 54
+    },
+    {
+      "content": "112min | D 10d",
+      "priority": 1,
+      "due": {
+        "offset_days": 0,
+        "start_time": "10:00",
+        "end_time": "11:52"
+      },
+      "copies": 1,
+      "deadline": {
+        "offset_days": 10
+      },
+      "gap_before_task": 43
+    },
+    {
+      "content": "47 min",
+      "priority": 1,
+      "due": {
+        "offset_days": 0,
+        "start_time": "10:00",
+        "end_time": "10:47"
+      },
+      "copies": 1,
+      "gap_before_task": 140
+    },
+    {
+      "content": "106min | D 7d",
+      "priority": 2,
+      "due": {
+        "offset_days": 0,
+        "start_time": "10:00",
+        "end_time": "11:46"
+      },
+      "copies": 1,
+      "deadline": {
+        "offset_days": 7
+      },
+      "gap_before_task": 119
+    },
+    {
+      "content": "133min | D 9d",
+      "priority": 2,
+      "due": {
+        "offset_days": 0,
+        "start_time": "10:00",
+        "end_time": "12:13"
+      },
+      "copies": 1,
+      "deadline": {
+        "offset_days": 9
+      },
+      "gap_before_task": 155
+    },
+    {
+      "content": "32min | D 13d",
+      "priority": 2,
+      "due": {
+        "offset_days": 0,
+        "start_time": "10:00",
+        "end_time": "10:32"
+      },
+      "copies": 1,
+      "deadline": {
+        "offset_days": 13
+      },
+      "gap_before_task": 138
+    },
+    {
+      "content": "80min | D 3d",
+      "priority": 3,
+      "due": {
+        "offset_days": 0,
+        "start_time": "10:00",
+        "end_time": "11:20"
+      },
+      "copies": 1,
+      "deadline": {
+        "offset_days": 3
+      },
+      "gap_before_task": 22
+    },
+    {
+      "content": "148min | D 7d",
+      "priority": 2,
+      "due": {
+        "offset_days": 0,
+        "start_time": "10:00",
+        "end_time": "12:28"
+      },
+      "copies": 1,
+      "deadline": {
+        "offset_days": 7
+      },
+      "gap_before_task": 102
+    },
+    {
+      "content": "93min | D 4d",
+      "priority": 4,
+      "due": {
+        "offset_days": 0,
+        "start_time": "10:00",
+        "end_time": "11:33"
+      },
+      "copies": 1,
+      "deadline": {
+        "offset_days": 4
+      },
+      "gap_before_task": 174
+    }
+  ]
+}

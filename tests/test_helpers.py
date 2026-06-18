@@ -1,15 +1,17 @@
 from __future__ import annotations
 
-from datetime import datetime, timedelta
+from datetime import datetime
 from typing import Iterable
 
 from automated_todoist_task_planner.planners import (
     PlanningResult,
     compute_task_objective_contribution,
 )
-from automated_todoist_task_planner.scheduled_task import ScheduledTask
+from automated_todoist_task_planner.planners.objective import (
+    FAILED_TASK_PENALTY_MULTIPLIER,
+    PRIORITY_BASE,
+)
 from automated_todoist_task_planner.tasks_schedule import TasksSchedule
-from automated_todoist_task_planner.todoist_helper import get_task_duration_minutes
 
 
 def build_task_snapshot(tasks: Iterable[object]) -> dict[int, dict[str, object]]:
@@ -93,16 +95,21 @@ def assert_no_tasks_missing(result: PlanningResult, snapshot: dict[int, dict[str
         )
 
 
+# TODO ideally remove
 def compute_objective(result: PlanningResult, planning_to_date: datetime) -> float:
     objective_value = 0.0
 
-    for scheduled_task in result.schedule.get_scheduled_tasks(include_fixed=True):
-        objective_value += compute_task_objective_contribution(scheduled_task)
+    schedule = result.schedule
+    for scheduled_task in schedule.get_scheduled_tasks(include_fixed=True):
+        objective_value += compute_task_objective_contribution(
+            scheduled_task,
+            schedule,
+            ignore_other_scheduled_tasks=True,
+        )
 
     for task in result.failed_to_schedule:
-        end = planning_to_date + timedelta(minutes=get_task_duration_minutes(task))
-        objective_value += compute_task_objective_contribution(
-            ScheduledTask(task=task, start=planning_to_date, end=end)
+        objective_value += FAILED_TASK_PENALTY_MULTIPLIER * (
+            PRIORITY_BASE**task.priority
         )
 
     return -objective_value

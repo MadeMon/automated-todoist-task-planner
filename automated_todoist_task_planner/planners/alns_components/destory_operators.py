@@ -81,7 +81,12 @@ def lowest_objective_contribution_destroy(
         return destroyed_state
 
     tasks_by_contribution = sorted(
-        scheduled_tasks, key=compute_task_objective_contribution
+        scheduled_tasks,
+        key=lambda scheduled_task: compute_task_objective_contribution(
+            scheduled_task,
+            destroyed_state.result.schedule,
+            ignore_other_scheduled_tasks=False,
+        ),
     )
     tasks_to_destroy = tasks_by_contribution[:destroy_count]
 

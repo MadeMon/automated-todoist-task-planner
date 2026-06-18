@@ -1,0 +1,92 @@
+DEBUG:src.automated_todoist_task_planner.todoist_webhook_server:Received webhook request with body=b'{
+    "event_data": {
+        "added_at": "2026-03-19T14:24:42.218574Z",
+        "added_by_uid": "20591530",
+        "assigned_by_uid": null,
+        "checked": false,
+        "child_order": 5,
+        "completed_at": null,
+        "completed_by_uid": null,
+        "content": "Test task 2",
+        "day_order": -1,
+        "deadline": null,
+        "description": "vbnfgh",
+        "due": {
+            "date": "2026-03-19T16:45:00",
+            "is_recurring": false,
+            "lang": "en",
+            "string": "19 Mar 16:45",
+            "timezone": null
+        },
+        "duration": {
+            "amount": 120,
+            "unit": "minute"
+        },
+        "goal_ids": [],
+        "id": "6gC9vXRHqFGJHFq4",
+        "is_collapsed": false,
+        "is_deleted": false,
+        "labels": [],
+        "note_count": 0,
+        "parent_id": null,
+        "priority": 2,
+        "project_id": "6g9p24qV96m67fH4",
+        "responsible_uid": null,
+        "section_id": null,
+        "updated_at": "2026-03-19T15:43:17.657845Z",
+        "url": "https://app.todoist.com/app/task/6gC9vXRHqFGJHFq4",
+        "user_id": "20591530"
+    },
+    "event_data_extra": {
+        "old_item": {
+            "added_at": "2026-03-19T14:24:42.218574Z",
+            "added_by_uid": "20591530",
+            "assigned_by_uid": null,
+            "checked": false,
+            "child_order": 5,
+            "completed_at": null,
+            "completed_by_uid": null,
+            "content": "Test task 2",
+            "day_order": -1,
+            "deadline": null,
+            "description": "vbnfgh",
+            "due": {
+                "date": "2026-03-19",
+                "is_recurring": false,
+                "lang": "en",
+                "string": "2026-03-19",
+                "timezone": null
+            },
+            "duration": {
+                "amount": 45,
+                "unit": "minute"
+            },
+            "goal_ids": [],
+            "id": "6gC9vXRHqFGJHFq4",
+            "is_collapsed": false,
+            "is_deleted": false,
+            "labels": [],
+            "note_count": 0,
+            "parent_id": null,
+            "priority": 2,
+            "project_id": "6g9p24qV96m67fH4",
+            "responsible_uid": null,
+            "section_id": null,
+            "updated_at": "2026-03-19T15:31:04.063099Z",
+            "url": "https://app.todoist.com/app/task/6gC9vXRHqFGJHFq4",
+            "user_id": "20591530"
+        },
+        "update_intent": "item_updated"
+    },
+    "event_name": "item:updated",
+    "initiator": {
+        "email": "matelf.kubik@gmail.com",
+        "full_name": "Mat\\u011bj Kub\\u00edk",
+        "id": "20591530",
+        "image_id": "1b15968a4dfad49e2a1518e8d5363164",
+        "is_premium": true
+    },
+    "triggered_at": "2026-03-19T15:43:17.952351Z",
+    "user_id": "20591530",
+    "version": "1"
+}'

@@ -5,8 +5,7 @@ description = "Default template for PDM package"
 authors = [
     {name = "Matěj Kubík", email = "kubik.m@icloud.com"},
 ]
-dependencies = [
-    "fastapi==0.135.*",
+dependencies = [ "fastapi==0.135.*",
     "uvicorn[standard]==0.42.*",
     "todoist-api-python==3.2.*",
     "debugpy>=1.8.20",
@@ -25,9 +24,10 @@ start.cmd = 'python main.py --api-token "$TODOIST_API_TOKEN" --client-secret "$T
 start.env_file = ".env"
 seed.cmd = 'python -m scripts.reset_pa026_playground_tasks'
 seed.env_file = ".env"
-mlflow = "mlflow server --port 8080 --backend-store-uri sqlite:///mlruns.db"
+mlflow = "mlflow ui --port 8080 --backend-store-uri sqlite:///mlruns.db"
 
 test = "python tests/test.py"
+test_comp = "python tests/test_comparisons.py"
 
 [tool.pdm]
 distribution = false

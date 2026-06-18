@@ -5,7 +5,7 @@
       "content": "Fixed",
       "labels": ["fixed"],
       "priority": "p4",
-      "schedule": {
+      "due": {
         "offset_days": 1,
         "start_time": "09:00",
         "end_time": "11:00"
@@ -14,7 +14,7 @@
     {
       "content": "Today",
       "priority": "p1",
-      "schedule": {
+      "due": {
         "offset_days": 0,
         "start_time": "09:00",
         "end_time": "09:30"
@@ -23,7 +23,7 @@
     {
       "content": "Priority 1 deadline",
       "priority": "p4",
-      "schedule": {
+      "due": {
         "offset_days": 7,
         "start_time": "09:00",
         "end_time": "11:00"
@@ -35,7 +35,7 @@
     {
       "content": "Priority 1 no deadline",
       "priority": "p4",
-      "schedule": {
+      "due": {
         "offset_days": 1,
         "start_time": "09:00",
         "end_time": "11:00"
@@ -44,7 +44,7 @@
     {
       "content": "Priority 2 deadline",
       "priority": "p3",
-      "schedule": {
+      "due": {
         "offset_days": 7,
         "start_time": "09:00",
         "end_time": "11:00"
@@ -56,7 +56,7 @@
     {
       "content": "Priority 2 no deadline",
       "priority": "p3",
-      "schedule": {
+      "due": {
         "offset_days": 1,
         "start_time": "09:00",
         "end_time": "11:00"

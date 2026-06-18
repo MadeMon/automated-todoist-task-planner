@@ -1,0 +1,974 @@
+{
+  "project_name": "PA026 Playground",
+  "tasks": [
+    {
+      "content": "Fixed",
+      "priority": 1,
+      "due": {
+        "offset_days": 3,
+        "start_time": "11:07",
+        "end_time": "11:28"
+      },
+      "copies": 1,
+      "labels": [
+        "fixed"
+      ]
+    },
+    {
+      "content": "Fixed",
+      "priority": 1,
+      "due": {
+        "offset_days": 5,
+        "start_time": "09:41",
+        "end_time": "10:24"
+      },
+      "copies": 1,
+      "labels": [
+        "fixed"
+      ]
+    },
+    {
+      "content": "Fixed",
+      "priority": 1,
+      "due": {
+        "offset_days": 1,
+        "start_time": "14:06",
+        "end_time": "14:17"
+      },
+      "copies": 1,
+      "labels": [
+        "fixed"
+      ]
+    },
+    {
+      "content": "Fixed",
+      "priority": 1,
+      "due": {
+        "offset_days": 0,
+        "start_time": "11:42",
+        "end_time": "12:25"
+      },
+      "copies": 1,
+      "labels": [
+        "fixed"
+      ]
+    },
+    {
+      "content": "Fixed",
+      "priority": 1,
+      "due": {
+        "offset_days": 4,
+        "start_time": "13:29",
+        "end_time": "13:46"
+      },
+      "copies": 1,
+      "labels": [
+        "fixed"
+      ]
+    },
+    {
+      "content": "Fixed",
+      "priority": 1,
+      "due": {
+        "offset_days": 2,
+        "start_time": "15:52",
+        "end_time": "16:42"
+      },
+      "copies": 1,
+      "labels": [
+        "fixed"
+      ]
+    },
+    {
+      "content": "Fixed",
+      "priority": 1,
+      "due": {
+        "offset_days": 6,
+        "start_time": "10:06",
+        "end_time": "10:33"
+      },
+      "copies": 1,
+      "labels": [
+        "fixed"
+      ]
+    },
+    {
+      "content": "Fixed",
+      "priority": 1,
+      "due": {
+        "offset_days": 6,
+        "start_time": "09:04",
+        "end_time": "09:47"
+      },
+      "copies": 1,
+      "labels": [
+        "fixed"
+      ]
+    },
+    {
+      "content": "Fixed",
+      "priority": 1,
+      "due": {
+        "offset_days": 1,
+        "start_time": "13:16",
+        "end_time": "13:56"
+      },
+      "copies": 1,
+      "labels": [
+        "fixed"
+      ]
+    },
+    {
+      "content": "Fixed",
+      "priority": 1,
+      "due": {
+        "offset_days": 2,
+        "start_time": "12:44",
+        "end_time": "13:42"
+      },
+      "copies": 1,
+      "labels": [
+        "fixed"
+      ]
+    },
+    {
+      "content": "Fixed",
+      "priority": 1,
+      "due": {
+        "offset_days": 4,
+        "start_time": "11:00",
+        "end_time": "11:24"
+      },
+      "copies": 1,
+      "labels": [
+        "fixed"
+      ]
+    },
+    {
+      "content": "Fixed",
+      "priority": 1,
+      "due": {
+        "offset_days": 0,
+        "start_time": "09:28",
+        "end_time": "10:16"
+      },
+      "copies": 1,
+      "labels": [
+        "fixed"
+      ]
+    },
+    {
+      "content": "Fixed",
+      "priority": 1,
+      "due": {
+        "offset_days": 5,
+        "start_time": "11:11",
+        "end_time": "12:06"
+      },
+      "copies": 1,
+      "labels": [
+        "fixed"
+      ]
+    },
+    {
+      "content": "Fixed",
+      "priority": 1,
+      "due": {
+        "offset_days": 3,
+        "start_time": "13:19",
+        "end_time": "14:04"
+      },
+      "copies": 1,
+      "labels": [
+        "fixed"
+      ]
+    },
+    {
+      "content": "Fixed",
+      "priority": 1,
+      "due": {
+        "offset_days": 1,
+        "start_time": "10:35",
+        "end_time": "10:56"
+      },
+      "copies": 1,
+      "labels": [
+        "fixed"
+      ]
+    },
+    {
+      "content": "Fixed",
+      "priority": 1,
+      "due": {
+        "offset_days": 5,
+        "start_time": "14:42",
+        "end_time": "15:42"
+      },
+      "copies": 1,
+      "labels": [
+        "fixed"
+      ]
+    },
+    {
+      "content": "Fixed",
+      "priority": 1,
+      "due": {
+        "offset_days": 2,
+        "start_time": "13:58",
+        "end_time": "14:56"
+      },
+      "copies": 1,
+      "labels": [
+        "fixed"
+      ]
+    },
+    {
+      "content": "Fixed",
+      "priority": 1,
+      "due": {
+        "offset_days": 3,
+        "start_time": "12:40",
+        "end_time": "13:03"
+      },
+      "copies": 1,
+      "labels": [
+        "fixed"
+      ]
+    },
+    {
+      "content": "Fixed",
+      "priority": 1,
+      "due": {
+        "offset_days": 0,
+        "start_time": "09:01",
+        "end_time": "09:23"
+      },
+      "copies": 1,
+      "labels": [
+        "fixed"
+      ]
+    },
+    {
+      "content": "Fixed",
+      "priority": 1,
+      "due": {
+        "offset_days": 4,
+        "start_time": "14:44",
+        "end_time": "15:26"
+      },
+      "copies": 1,
+      "labels": [
+        "fixed"
+      ]
+    },
+    {
+      "content": "Fixed",
+      "priority": 1,
+      "due": {
+        "offset_days": 6,
+        "start_time": "16:01",
+        "end_time": "16:35"
+      },
+      "copies": 1,
+      "labels": [
+        "fixed"
+      ]
+    },
+    {
+      "content": "Fixed",
+      "priority": 1,
+      "due": {
+        "offset_days": 1,
+        "start_time": "11:37",
+        "end_time": "11:56"
+      },
+      "copies": 1,
+      "labels": [
+        "fixed"
+      ]
+    },
+    {
+      "content": "Fixed",
+      "priority": 1,
+      "due": {
+        "offset_days": 5,
+        "start_time": "16:25",
+        "end_time": "16:35"
+      },
+      "copies": 1,
+      "labels": [
+        "fixed"
+      ]
+    },
+    {
+      "content": "Fixed",
+      "priority": 1,
+      "due": {
+        "offset_days": 6,
+        "start_time": "13:16",
+        "end_time": "14:12"
+      },
+      "copies": 1,
+      "labels": [
+        "fixed"
+      ]
+    },
+    {
+      "content": "Fixed",
+      "priority": 1,
+      "due": {
+        "offset_days": 0,
+        "start_time": "15:27",
+        "end_time": "16:14"
+      },
+      "copies": 1,
+      "labels": [
+        "fixed"
+      ]
+    },
+    {
+      "content": "202min | D 4d",
+      "priority": 1,
+      "due": {
+        "offset_days": 0,
+        "start_time": "10:00",
+        "end_time": "13:22"
+      },
+      "copies": 1,
+      "deadline": {
+        "offset_days": 4
+      }
+    },
+    {
+      "content": "55min | D 2d",
+      "priority": 2,
+      "due": {
+        "offset_days": 0,
+        "start_time": "10:00",
+        "end_time": "10:55"
+      },
+      "copies": 1,
+      "deadline": {
+        "offset_days": 2
+      }
+    },
+    {
+      "content": "38min | D 13d",
+      "priority": 3,
+      "due": {
+        "offset_days": 0,
+        "start_time": "10:00",
+        "end_time": "10:38"
+      },
+      "copies": 1,
+      "deadline": {
+        "offset_days": 13
+      }
+    },
+    {
+      "content": "74min | D 5d",
+      "priority": 2,
+      "due": {
+        "offset_days": 0,
+        "start_time": "10:00",
+        "end_time": "11:14"
+      },
+      "copies": 1,
+      "deadline": {
+        "offset_days": 5
+      }
+    },
+    {
+      "content": "30min | D 9d",
+      "priority": 1,
+      "due": {
+        "offset_days": 0,
+        "start_time": "10:00",
+        "end_time": "10:30"
+      },
+      "copies": 1,
+      "deadline": {
+        "offset_days": 9
+      }
+    },
+    {
+      "content": "87min | D 0d",
+      "priority": 2,
+      "due": {
+        "offset_days": 0,
+        "start_time": "10:00",
+        "end_time": "11:27"
+      },
+      "copies": 1,
+      "deadline": {
+        "offset_days": 0
+      }
+    },
+    {
+      "content": "11min | D 5d",
+      "priority": 3,
+      "due": {
+        "offset_days": 0,
+        "start_time": "10:00",
+        "end_time": "10:11"
+      },
+      "copies": 1,
+      "deadline": {
+        "offset_days": 5
+      }
+    },
+    {
+      "content": "46min | D 13d",
+      "priority": 1,
+      "due": {
+        "offset_days": 0,
+        "start_time": "10:00",
+        "end_time": "10:46"
+      },
+      "copies": 1,
+      "deadline": {
+        "offset_days": 13
+      }
+    },
+    {
+      "content": "186min | D 4d",
+      "priority": 4,
+      "due": {
+        "offset_days": 0,
+        "start_time": "10:00",
+        "end_time": "13:06"
+      },
+      "copies": 1,
+      "deadline": {
+        "offset_days": 4
+      }
+    },
+    {
+      "content": "107min | D 1d",
+      "priority": 3,
+      "due": {
+        "offset_days": 0,
+        "start_time": "10:00",
+        "end_time": "11:47"
+      },
+      "copies": 1,
+      "deadline": {
+        "offset_days": 1
+      }
+    },
+    {
+      "content": "79min | D 9d",
+      "priority": 4,
+      "due": {
+        "offset_days": 0,
+        "start_time": "10:00",
+        "end_time": "11:19"
+      },
+      "copies": 1,
+      "deadline": {
+        "offset_days": 9
+      }
+    },
+    {
+      "content": "22min | D 14d",
+      "priority": 3,
+      "due": {
+        "offset_days": 0,
+        "start_time": "10:00",
+        "end_time": "10:22"
+      },
+      "copies": 1,
+      "deadline": {
+        "offset_days": 14
+      }
+    },
+    {
+      "content": "102min | D 10d",
+      "priority": 1,
+      "due": {
+        "offset_days": 0,
+        "start_time": "10:00",
+        "end_time": "11:42"
+      },
+      "copies": 1,
+      "deadline": {
+        "offset_days": 10
+      }
+    },
+    {
+      "content": "43min | D 5d",
+      "priority": 2,
+      "due": {
+        "offset_days": 0,
+        "start_time": "10:00",
+        "end_time": "10:43"
+      },
+      "copies": 1,
+      "deadline": {
+        "offset_days": 5
+      }
+    },
+    {
+      "content": "19min | D 14d",
+      "priority": 1,
+      "due": {
+        "offset_days": 0,
+        "start_time": "10:00",
+        "end_time": "10:19"
+      },
+      "copies": 1,
+      "deadline": {
+        "offset_days": 14
+      }
+    },
+    {
+      "content": "83min | D 1d",
+      "priority": 4,
+      "due": {
+        "offset_days": 0,
+        "start_time": "10:00",
+        "end_time": "11:23"
+      },
+      "copies": 1,
+      "deadline": {
+        "offset_days": 1
+      }
+    },
+    {
+      "content": "7min | D 6d",
+      "priority": 4,
+      "due": {
+        "offset_days": 0,
+        "start_time": "10:00",
+        "end_time": "10:07"
+      },
+      "copies": 1,
+      "deadline": {
+        "offset_days": 6
+      }
+    },
+    {
+      "content": "99min | D 8d",
+      "priority": 4,
+      "due": {
+        "offset_days": 0,
+        "start_time": "10:00",
+        "end_time": "11:39"
+      },
+      "copies": 1,
+      "deadline": {
+        "offset_days": 8
+      }
+    },
+    {
+      "content": "239min | D 9d",
+      "priority": 3,
+      "due": {
+        "offset_days": 0,
+        "start_time": "10:00",
+        "end_time": "13:59"
+      },
+      "copies": 1,
+      "deadline": {
+        "offset_days": 9
+      }
+    },
+    {
+      "content": "125min | D 8d",
+      "priority": 2,
+      "due": {
+        "offset_days": 0,
+        "start_time": "10:00",
+        "end_time": "12:05"
+      },
+      "copies": 1,
+      "deadline": {
+        "offset_days": 8
+      }
+    },
+    {
+      "content": "99min | D 12d",
+      "priority": 2,
+      "due": {
+        "offset_days": 0,
+        "start_time": "10:00",
+        "end_time": "11:39"
+      },
+      "copies": 1,
+      "deadline": {
+        "offset_days": 12
+      }
+    },
+    {
+      "content": "151min | D 6d",
+      "priority": 1,
+      "due": {
+        "offset_days": 0,
+        "start_time": "10:00",
+        "end_time": "12:31"
+      },
+      "copies": 1,
+      "deadline": {
+        "offset_days": 6
+      }
+    },
+    {
+      "content": "76min | D 9d",
+      "priority": 3,
+      "due": {
+        "offset_days": 0,
+        "start_time": "10:00",
+        "end_time": "11:16"
+      },
+      "copies": 1,
+      "deadline": {
+        "offset_days": 9
+      }
+    },
+    {
+      "content": "59min | D 0d",
+      "priority": 3,
+      "due": {
+        "offset_days": 0,
+        "start_time": "10:00",
+        "end_time": "10:59"
+      },
+      "copies": 1,
+      "deadline": {
+        "offset_days": 0
+      }
+    },
+    {
+      "content": "24min | D 9d",
+      "priority": 3,
+      "due": {
+        "offset_days": 0,
+        "start_time": "10:00",
+        "end_time": "10:24"
+      },
+      "copies": 1,
+      "deadline": {
+        "offset_days": 9
+      }
+    },
+    {
+      "content": "111min | D 11d",
+      "priority": 1,
+      "due": {
+        "offset_days": 0,
+        "start_time": "10:00",
+        "end_time": "11:51"
+      },
+      "copies": 1,
+      "deadline": {
+        "offset_days": 11
+      }
+    },
+    {
+      "content": "109min | D 7d",
+      "priority": 4,
+      "due": {
+        "offset_days": 0,
+        "start_time": "10:00",
+        "end_time": "11:49"
+      },
+      "copies": 1,
+      "deadline": {
+        "offset_days": 7
+      }
+    },
+    {
+      "content": "7min | D 5d",
+      "priority": 1,
+      "due": {
+        "offset_days": 0,
+        "start_time": "10:00",
+        "end_time": "10:07"
+      },
+      "copies": 1,
+      "deadline": {
+        "offset_days": 5
+      }
+    },
+    {
+      "content": "91min | D 9d",
+      "priority": 3,
+      "due": {
+        "offset_days": 0,
+        "start_time": "10:00",
+        "end_time": "11:31"
+      },
+      "copies": 1,
+      "deadline": {
+        "offset_days": 9
+      }
+    },
+    {
+      "content": "139min | D 8d",
+      "priority": 3,
+      "due": {
+        "offset_days": 0,
+        "start_time": "10:00",
+        "end_time": "12:19"
+      },
+      "copies": 1,
+      "deadline": {
+        "offset_days": 8
+      }
+    },
+    {
+      "content": "185min | D 3d",
+      "priority": 2,
+      "due": {
+        "offset_days": 0,
+        "start_time": "10:00",
+        "end_time": "13:05"
+      },
+      "copies": 1,
+      "deadline": {
+        "offset_days": 3
+      }
+    },
+    {
+      "content": "101min | D 10d",
+      "priority": 1,
+      "due": {
+        "offset_days": 0,
+        "start_time": "10:00",
+        "end_time": "11:41"
+      },
+      "copies": 1,
+      "deadline": {
+        "offset_days": 10
+      }
+    },
+    {
+      "content": "62min | D 1d",
+      "priority": 1,
+      "due": {
+        "offset_days": 0,
+        "start_time": "10:00",
+        "end_time": "11:02"
+      },
+      "copies": 1,
+      "deadline": {
+        "offset_days": 1
+      }
+    },
+    {
+      "content": "57 min",
+      "priority": 2,
+      "due": {
+        "offset_days": 0,
+        "start_time": "10:00",
+        "end_time": "10:57"
+      },
+      "copies": 1
+    },
+    {
+      "content": "67 min",
+      "priority": 3,
+      "due": {
+        "offset_days": 0,
+        "start_time": "10:00",
+        "end_time": "11:07"
+      },
+      "copies": 1
+    },
+    {
+      "content": "25min | D 3d",
+      "priority": 1,
+      "due": {
+        "offset_days": 0,
+        "start_time": "10:00",
+        "end_time": "10:25"
+      },
+      "copies": 1,
+      "deadline": {
+        "offset_days": 3
+      }
+    },
+    {
+      "content": "163min | D 14d",
+      "priority": 2,
+      "due": {
+        "offset_days": 0,
+        "start_time": "10:00",
+        "end_time": "12:43"
+      },
+      "copies": 1,
+      "deadline": {
+        "offset_days": 14
+      }
+    },
+    {
+      "content": "82min | D 7d",
+      "priority": 4,
+      "due": {
+        "offset_days": 0,
+        "start_time": "10:00",
+        "end_time": "11:22"
+      },
+      "copies": 1,
+      "deadline": {
+        "offset_days": 7
+      }
+    },
+    {
+      "content": "104min | D 13d",
+      "priority": 1,
+      "due": {
+        "offset_days": 0,
+        "start_time": "10:00",
+        "end_time": "11:44"
+      },
+      "copies": 1,
+      "deadline": {
+        "offset_days": 13
+      }
+    },
+    {
+      "content": "47min | D 0d",
+      "priority": 1,
+      "due": {
+        "offset_days": 0,
+        "start_time": "10:00",
+        "end_time": "10:47"
+      },
+      "copies": 1,
+      "deadline": {
+        "offset_days": 0
+      }
+    },
+    {
+      "content": "146min | D 6d",
+      "priority": 4,
+      "due": {
+        "offset_days": 0,
+        "start_time": "10:00",
+        "end_time": "12:26"
+      },
+      "copies": 1,
+      "deadline": {
+        "offset_days": 6
+      }
+    },
+    {
+      "content": "158min | D 7d",
+      "priority": 1,
+      "due": {
+        "offset_days": 0,
+        "start_time": "10:00",
+        "end_time": "12:38"
+      },
+      "copies": 1,
+      "deadline": {
+        "offset_days": 7
+      }
+    },
+    {
+      "content": "63min | D 13d",
+      "priority": 4,
+      "due": {
+        "offset_days": 0,
+        "start_time": "10:00",
+        "end_time": "11:03"
+      },
+      "copies": 1,
+      "deadline": {
+        "offset_days": 13
+      }
+    },
+    {
+      "content": "48min | D 3d",
+      "priority": 3,
+      "due": {
+        "offset_days": 0,
+        "start_time": "10:00",
+        "end_time": "10:48"
+      },
+      "copies": 1,
+      "deadline": {
+        "offset_days": 3
+      }
+    },
+    {
+      "content": "19min | D 5d",
+      "priority": 4,
+      "due": {
+        "offset_days": 0,
+        "start_time": "10:00",
+        "end_time": "10:19"
+      },
+      "copies": 1,
+      "deadline": {
+        "offset_days": 5
+      }
+    },
+    {
+      "content": "77min | D 3d",
+      "priority": 3,
+      "due": {
+        "offset_days": 0,
+        "start_time": "10:00",
+        "end_time": "11:17"
+      },
+      "copies": 1,
+      "deadline": {
+        "offset_days": 3
+      }
+    },
+    {
+      "content": "183min | D 10d",
+      "priority": 4,
+      "due": {
+        "offset_days": 0,
+        "start_time": "10:00",
+        "end_time": "13:03"
+      },
+      "copies": 1,
+      "deadline": {
+        "offset_days": 10
+      }
+    },
+    {
+      "content": "16min | D 7d",
+      "priority": 3,
+      "due": {
+        "offset_days": 0,
+        "start_time": "10:00",
+        "end_time": "10:16"
+      },
+      "copies": 1,
+      "deadline": {
+        "offset_days": 7
+      }
+    },
+    {
+      "content": "12min | D 7d",
+      "priority": 3,
+      "due": {
+        "offset_days": 0,
+        "start_time": "10:00",
+        "end_time": "10:12"
+      },
+      "copies": 1,
+      "deadline": {
+        "offset_days": 7
+      }
+    },
+    {
+      "content": "155min | D 3d",
+      "priority": 2,
+      "due": {
+        "offset_days": 0,
+        "start_time": "10:00",
+        "end_time": "12:35"
+      },
+      "copies": 1,
+      "deadline": {
+        "offset_days": 3
+      }
+    }
+  ]
+}
