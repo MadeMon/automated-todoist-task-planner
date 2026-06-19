@@ -1,31 +1,3 @@
-"""Todoist webhook receiver component.
-
-This module exposes an HTTP endpoint that can receive Todoist webhook payloads.
-When a webhook request is received, it fetches the tasks planned for the next 14
-days using the official Todoist SDK and then calls a user-supplied callback with
-those tasks.
-
-Example usage:
-
-    def handle_tasks(tasks: list[Task]) -> None:
-        for t in tasks:
-            print(t.content)
-
-    server = TodoistWebhookServer(
-        api_token="<TODOIST_API_TOKEN>",
-        client_secret="<TODOIST_CLIENT_SECRET>",
-        on_tasks_fetched=handle_tasks,
-    )
-    server.run(host="0.0.0.0", port=8080)
-
-Todoist webhooks send an `X-Todoist-Hmac-SHA256` header; we validate the payload
-against that header to ensure the request came from Todoist.
-
-Note: Todoist will retry webhook deliveries if the endpoint returns a non-2xx
-status code, so this server always returns HTTP 200 even if signature verification
-fails or task fetching fails. Instead, failures are logged.
-"""
-
 from __future__ import annotations
 
 import base64
@@ -52,7 +24,17 @@ class TodoistWebhookConfig:
 
 
 class TodoistWebhookServer:
-    """A minimal webhook receiver that polls Todoist when a webhook is received."""
+    """
+    A minimal webhook receiver that polls Todoist when a webhook is received.
+
+    Args:
+        client_secret: Todoist app client secret; used to validate webhook signatures.
+        on_webhook: Callback invoked when a webhook is received.
+        integration_user_id: ID of the integration user to ignore events from.
+        host: Host to bind the HTTP server to.
+        port: Port to run the HTTP server on.
+        path: HTTP path on which Todoist will send webhook events.
+    """
 
     def __init__(
         self,
@@ -95,8 +77,6 @@ class TodoistWebhookServer:
             x_todoist_delivery_id: Optional[str] = Header(None),
         ) -> PlainTextResponse:
             body = await request.body()
-            # logger.debug("Received webhook request with body=%s", body) # TEMP
-            # logger.debug("Received webhook delivery id=%s", x_todoist_delivery_id)
 
             if not x_todoist_hmac_sha256:
                 logger.warning("Missing X-Todoist-Hmac-SHA256 header")
@@ -132,6 +112,10 @@ class TodoistWebhookServer:
 
         Todoist sends an `X-Todoist-Hmac-SHA256` header which contains a base64 encoded
         HMAC-SHA256 of the raw request body signed with your app's client secret.
+
+        Args:
+            body: The raw request body.
+            signature_header: The value of the `X-Todoist-Hmac-SHA256` header.
         """
         computed_digest = hmac.new(
             self._config.client_secret.encode("utf-8"), body, hashlib.sha256

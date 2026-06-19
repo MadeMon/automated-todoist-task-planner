@@ -41,6 +41,4 @@ class MockPlanner(BasePlanner):
                 failed_to_schedule.append(task)
                 continue
 
-            print("Scheduled task", task.content, "to", schedule.days[0][-1].start)
-
         return PlanningResult(schedule=schedule, failed_to_schedule=failed_to_schedule)

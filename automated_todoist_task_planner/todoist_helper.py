@@ -4,12 +4,28 @@ from todoist_api_python.models import Task
 
 
 def is_task_fixed(task: Task) -> bool:
-    """Determine if the task is fixed (has a specific due date and "fixed" label) or flexible."""
+    """
+    Determine if the task is fixed (has a specific due date and "fixed" label) or flexible.
+
+    Args:
+        task: A Todoist Task object.
+
+    Returns:
+        True if the task is fixed, False otherwise.
+    """
     return "fixed" in (task.labels or [])
 
 
 def get_task_duration_minutes(task: Task) -> int:
-    """Return the duration of the task in minutes, or None if no duration is set."""
+    """
+    Return the duration of the task in minutes, or None if no duration is set.
+
+    Args:
+        task: A Todoist Task object.
+
+    Returns:
+        The duration of the task in minutes.
+    """
     if task.duration is None:
         return 0
 
@@ -30,7 +46,12 @@ def get_task_duration_minutes(task: Task) -> int:
 
 
 def get_task_due_date(task: Task) -> datetime | None:
-    """Return the due date of the task as a datetime.date object, or None if no due date is set."""
+    """
+    Return the due date of the task as a datetime.date object, or None if no due date is set.
+
+    Args:
+        task: A Todoist Task object.
+    """
     if task.due is None:
         return None
 
@@ -43,7 +64,12 @@ def get_task_due_date(task: Task) -> datetime | None:
 
 
 def get_task_deadline_date(task: Task) -> date | None:
-    """Return the deadline date of the task as a datetime.date object, or None if no deadline is set."""
+    """
+    Return the deadline date of the task as a datetime.date object, or None if no deadline is set.
+
+    Args:
+        task: A Todoist Task object.
+    """
     if task.deadline is None:
         return None
 

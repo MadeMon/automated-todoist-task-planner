@@ -84,10 +84,6 @@ DEFAULT_SAMPLE_TASK_LISTS_PATHS: list[Path] = [
 
 # Explicitly list operator combinations to test.
 PLANNER_OPERATOR_COMBINATIONS: list[dict[str, list[Callable]]] = [
-    # {
-    #     "destroy": [lowest_objective_contribution_destroy],
-    #     "repair": [simple_heuristic_repair],
-    # },
     {
         "destroy": [lowest_objective_contribution_destroy],
         "repair": [regret_repair],
@@ -96,10 +92,6 @@ PLANNER_OPERATOR_COMBINATIONS: list[dict[str, list[Callable]]] = [
         "destroy": [lowest_objective_contribution_destroy, short_task_clusters_destroy],
         "repair": [regret_repair],
     },
-    # {
-    #     "destroy": [random_destroy],
-    #     "repair": [regret_repair],
-    # },
     {
         "destroy": [random_duration_destroy],
         "repair": [regret_repair],

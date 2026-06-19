@@ -29,8 +29,6 @@ def _settle_schedule(schedule) -> None:
                 scheduled_task.end = current_start + duration
             current_start = scheduled_task.end
 
-        # schedule.days[day_index] = sorted_tasks
-
 
 
 def _finalize_destroy(state: ProblemState, kwargs) -> ProblemState:

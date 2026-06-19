@@ -30,7 +30,12 @@ class TodoistTaskClient:
     async def fetch_tasks_with_duration_due_soon_or_overdue(
         self, query: str
     ) -> list[Task]:
-        """Return tasks that are overdue or due in next two weeks and have duration."""
+        """
+        Return tasks that are overdue or due in next two weeks and have duration.
+        
+        Args:
+            query: A Todoist query string to filter tasks. For example, "overdue | due before: +14 days"."
+        """
         active_query = query
         tasks_pages = await self._api.filter_tasks(query=active_query)
         tasks: list[Task] = []
@@ -41,7 +46,14 @@ class TodoistTaskClient:
         return tasks
 
     async def update_tasks(self, planning_result: PlanningResult) -> list[Task]:
-        """Update only tasks whose due or labels changed compared to Todoist state."""
+        """
+        Update only tasks whose due or labels changed compared to Todoist state.
+
+        Args:
+            planning_result: The result of the planning process containing scheduled and failed tasks.
+        Returns:
+            A list of updated tasks.
+        """
 
         all_task_ids = [
             task.id
