@@ -50,14 +50,7 @@ PLANNING_DAYS = 14  # Plan tasks due in next two weeks by default, but this can 
 TASK_SEEDS_DIR = Path(os.path.dirname(__file__)) / ".." / "task_seeds"
 
 DEFAULT_SAMPLE_TASK_LISTS_PATHS: list[Path] = [
-    # TASK_SEEDS_DIR / "seed_deadlines_priority_fixed.json",
-    # TASK_SEEDS_DIR / "seed_deadlines_priority.json",
-    # TASK_SEEDS_DIR / "seed_deadlines_priority_fixed_gaps.json",
-    # TASK_SEEDS_DIR / "seed_deadlines_priority_fixed_varied_gaps.json"
-    # TASK_SEEDS_DIR / "seed_deadlines_priority_fixed_gaps_fract.json"
-    # TASK_SEEDS_DIR / "seed_deadlines_priority_fixed_gaps_fract_arbitrary.json"
-    TASK_SEEDS_DIR / "kinda-good1.json"
-    # TASK_SEEDS_DIR / "generator-testing.json"
+    TASK_SEEDS_DIR / "seed-1.json"
 ]
 
 DEFAULT_PLANNERS: list[Callable[[], BasePlanner]] = [

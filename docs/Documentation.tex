@@ -91,7 +91,7 @@ The project requires Python 3.13 or newer and uses PDM as the primary dependency
 
 \subsection{Setup}
 \begin{enumerate}
-\item Clone the repository and navigate to the project directory.
+\item Extract the zip file containing the source code and navigate to the project directory.
 \item Copy \texttt{.env\_example} to \texttt{.env} and fill in the required values:
 \begin{verbatim}
 cp .env_example .env
@@ -104,7 +104,9 @@ This installs all required packages including: FastAPI, ALNS, Todoist API client
 \end{enumerate}
 
 \subsection{Testing and Evaluation}
-The basic verification suite is started with \texttt{pdm run test}. It checks the core scheduling logic and guards against regressions in feasibility handling. The operator comparison experiment is launched with \texttt{pdm run test\_comp}; it executes the predefined task seeds, compares multiple destroy and repair combinations, and writes the resulting tables and plots. For experiment tracking, \texttt{pdm run mlflow} starts the MLflow user interface on port 8080 so that the search behavior and generated metrics can be inspected interactively.
+The operator comparison experiment is launched with \texttt{pdm run test\_comp}; it executes the predefined task seeds, compares multiple destroy and repair combinations, and writes the resulting tables and plots. For experiment tracking, \texttt{pdm run mlflow} starts the MLflow user interface on port 8080 so that the search behavior and generated metrics can be inspected interactively.
+
+Generated outputs: \texttt{best\_objective\_plot.png} — convergence plot comparing the tested methods; \texttt{best\_objective.csv} — CSV with results for all methods across all test seeds; and the \texttt{test\_schedules/} folder, which contains \texttt{comparisons\_summary\_bar.png} (bar plot comparing best objectives per model) plus schedule visualizations for each model/seed combination.
 
 \subsection{Running the application}
 For a simple demonstration, the planners can be used directly from Python without connecting to a live Todoist account. Full integration requires webhook configuration and a separate Todoist setup, which is described in detail in the README because it depends on external services and two Pro accounts. In practice, the demo mode is sufficient for testing the optimization logic, while the full integration is the path for real-world deployment.
